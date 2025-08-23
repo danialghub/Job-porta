@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets'
 
-const JobCard = ({ location, title, level, description }) => {
+const JobCard = ({ _id, location, title, level, description }) => {
+    const navigate = useNavigate()
     return (
         <div className='border shadow rounded p-6'>
             <div>
@@ -14,8 +16,12 @@ const JobCard = ({ location, title, level, description }) => {
                 </div>
                 <p className='text-sm text-gray-500 mt-4' dangerouslySetInnerHTML={{ __html: description.slice(0, 150).concat('...') }}></p>
                 <div className='flex  mt-4 gap-4 text-sm'>
-                    <button className='bg-blue-600 rounded text-white px-4 py-2'>Apply Now</button>
-                    <button className='text-gray-500 border border-gray-500 rounded px-4 py-2'>Learn More</button>
+                    <button
+                        onClick={() => navigate(`/apply-job/${_id}`)}
+                        className='bg-blue-600 rounded text-white px-4 py-2'>Apply Now</button>
+                    <button
+                        onClick={() => navigate(`/apply-job/${_id}`)}
+                        className='text-gray-500 border border-gray-500 rounded px-4 py-2'>Learn More</button>
                 </div>
             </div>
         </div>

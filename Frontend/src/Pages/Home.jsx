@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import Navbar from '../Components/Navbar'
 import Hero from '../Components/Hero'
 import JobListing from '../Components/JobListing'
+import Footer from '../Components/Footer'
 import { AppContext } from '../context/AppContext'
 const Home = () => {
 
@@ -11,7 +12,8 @@ const Home = () => {
         <div>
             <Navbar />
             <Hero />
-                <JobListing />
+            <JobListing />
+            <Footer />
 
         </div>
     )

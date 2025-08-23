@@ -8,17 +8,19 @@ const AppContextProvider = ({ children }) => {
     const [searchFilter, setSearchFilter] = useState({ location: "", job: "" })
     const [isSearched, setIsSearched] = useState(false)
     const [jobs, setJobs] = useState([])
+    const [showRecruiterLogin, setShowRecruiterLogin] = useState(false)
 
 
-    const getJobs = async()=>{
+    const getJobs = async () => {
         setJobs(jobsData)
     }
-    useEffect(()=>getJobs(),[])
+    useEffect(() => getJobs(), [])
 
     const value = {
         searchFilter, setSearchFilter,
         isSearched, setIsSearched,
-        jobs, setJobs
+        jobs, setJobs,
+        showRecruiterLogin, setShowRecruiterLogin
 
     }
 
