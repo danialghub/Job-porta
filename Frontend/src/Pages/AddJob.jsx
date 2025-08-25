@@ -1,6 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Quill from 'quill'
 import { JobCategories, JobLocations } from '../assets/assets'
+import { AppContext } from '../context/AppContext'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 const AddJob = () => {
 
     const [title, setTitle] = useState('')
@@ -11,12 +14,41 @@ const AddJob = () => {
 
     const editorRef = useRef(null)
     const quillRef = useRef(null)
+
+    const { backendUrl, companyToken } = useContext(AppContext)
+
     useEffect(() => {
         if (!quillRef.current && editorRef.current)
             quillRef.current = new Quill(editorRef.current, {
                 theme: 'snow'
             })
     }, [])
+    const onSubmitHandler = async (e) => {
+        e.preventDefault()
+        try {
+            const description = quillRef.current.root.innerHTML
+
+            const { data } = await axios.post(backendUrl + "/api/company/post-job", {
+                title,
+                description,
+                category,
+                level,
+                salary,
+                location,
+            }, { headers: { token: companyToken } })
+            if (data.success) {
+                toast.success("a new Job Successufully Added")
+                setTitle("")
+                setSalary(0)
+                quillRef.current.root.innerHTML = ""
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+
+        }
+    }
 
     return (
         <form className='container max-w-5xl p-4 flex flex-col w-full items-start gap-3'>
@@ -85,7 +117,9 @@ const AddJob = () => {
                     type="Number"
                     min={0} />
             </div>
-            <button className='w-28 py-2 mt-4 bg-gray-800 text-white rounded'>ADD</button>
+            <button
+                onClick={onSubmitHandler}
+                className='w-28 py-2 mt-4 bg-gray-800 text-white rounded'>ADD</button>
 
         </form>
     )

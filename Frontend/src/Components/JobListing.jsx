@@ -3,7 +3,7 @@ import { AppContext } from '../context/AppContext'
 import { JobCategories, JobLocations, assets } from '../assets/assets'
 import JobCard from './JobCard'
 import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
-
+import Loarder from './Loading'
 const JobListing = () => {
 
     const { isSearched, searchFilter, setSearchFilter, jobs } = useContext(AppContext)
@@ -127,7 +127,7 @@ const JobListing = () => {
 
             </div>
             {/* Job List */}
-            <section className=' w-full lg-w-3/4 text-gray-800 max-lg:px-4' id='job_list'>
+            {jobs.length ? <section className=' w-full lg-w-3/4 text-gray-800 max-lg:px-4' id='job_list'>
                 <h3 className='font-medium text-3xl py-2'>Latest Jobs</h3>
                 <p className='mb-8'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci sequi ea voluptatibus inventore, enim error.</p>
 
@@ -173,7 +173,8 @@ const JobListing = () => {
                 )
                 }
             </section>
-
+                : <Loarder />
+            }
 
 
         </div>

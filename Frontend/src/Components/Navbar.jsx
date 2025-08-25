@@ -13,7 +13,7 @@ const Navbar = () => {
     return (
         <div className='shadow py-4'>
             <div className='container px-4 2xl:px-20 flex justify-between items-center mx-auto'>
-                <img src={assets.logo} alt="" />
+                <img src={assets.logo} onClick={() => {navigate('/'); scrollTo(0,500)}} alt="" />
                 {
                     user
                         ? <div className='flex items-center gap-3'>

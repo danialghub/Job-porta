@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets'
 
-const JobCard = ({ _id, location, title, level, description }) => {
+const JobCard = ({ _id, location, title, level, description, companyId }) => {
     const navigate = useNavigate()
     return (
         <div className='border shadow rounded p-6'>
             <div>
                 <div className='flex justify-between items-center'>
-                    <img className='h-8' src={assets.company_icon} alt="" />
+                    <img className='h-8' src={companyId.image} alt="" />
                 </div>
                 <h3 className='font-medium text-xl mt-2'>{title}</h3>
                 <div className='flex items-center gap-3 mt-2 text-xs'>
@@ -17,10 +17,10 @@ const JobCard = ({ _id, location, title, level, description }) => {
                 <p className='text-sm text-gray-500 mt-4' dangerouslySetInnerHTML={{ __html: description.slice(0, 150).concat('...') }}></p>
                 <div className='flex  mt-4 gap-4 text-sm'>
                     <button
-                        onClick={() => navigate(`/apply-job/${_id}`)}
+                        onClick={() => { navigate(`/apply-job/${_id}`); scrollTo(0, 0) }}
                         className='bg-blue-600 rounded text-white px-4 py-2'>Apply Now</button>
                     <button
-                        onClick={() => navigate(`/apply-job/${_id}`)}
+                        onClick={() => { navigate(`/apply-job/${_id}`); scrollTo(0, 0) }}
                         className='text-gray-500 border border-gray-500 rounded px-4 py-2'>Learn More</button>
                 </div>
             </div>
