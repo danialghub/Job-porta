@@ -29,10 +29,10 @@ const AppContextProvider = ({ children }) => {
             if (data.success) {
                 setJobs(data.jobs)
             } else {
-                toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+                toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+            toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
 
         }
     }
@@ -54,21 +54,18 @@ const AppContextProvider = ({ children }) => {
         try {
             const token = await getToken()
 
-
-
             const { data } = await axios.get(backendUrl + '/api/users/user', {
                 headers: { Authorization: `Bearer ${token}` }
             })
 
-            console.log(data);
             if (data.succuss) {
                 setUserData(data.user)
 
             } else {
-                toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+                toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+            toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
 
         }
     }
@@ -76,7 +73,7 @@ const AppContextProvider = ({ children }) => {
         try {
             const token = await getToken()
             console.log(token);
-            
+
             const { data } = await axios.get(backendUrl + '/api/users/applications', {
                 headers: { Authorization: `Bearer ${token}` }
             })
@@ -88,7 +85,7 @@ const AppContextProvider = ({ children }) => {
                 setUserApplications([])
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+            toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
 
         }
     }
@@ -98,7 +95,7 @@ const AppContextProvider = ({ children }) => {
         setCompanyToken(null)
         localStorage.removeItem('companyToken')
         navigate('/')
-        toast.success("با موفقیت خارج شدید", { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+        toast.success("با موفقیت خارج شدید", { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
     }
 
     useEffect(() => {

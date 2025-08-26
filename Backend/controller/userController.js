@@ -7,7 +7,6 @@ import { v2 as cloudinary } from 'cloudinary'
 export const getUserData = async (req, res) => {
     const userId = req.auth().userId
 
-
     try {
         const user = await User.findById(userId)
 
@@ -31,12 +30,12 @@ export const applyForJob = async (req, res) => {
         const isAlreadyApplied = await JobApplication.find({ jobId, userId })
 
         if (isAlreadyApplied.length) {
-            return res.json({ succuss: true, message: "درخواست داده شد" })
+            return res.json({ success: true, message: "درخواست داده شد" })
         }
         const jobData = await Job.findById(jobId)
 
         if (!jobData) {
-            return res.json({ succuss: false, message: "کار پیدا نشد" })
+            return res.json({ success: false, message: "کار پیدا نشد" })
         }
         await JobApplication.create({
             companyId: jobData.companyId,
@@ -44,9 +43,9 @@ export const applyForJob = async (req, res) => {
             jobId,
             date: Date.now()
         })
-        return res.json({ succuss: true, message: "با موفقیت درخواست داده شد" })
+        return res.json({ success: true, message: "با موفقیت درخواست داده شد" })
     } catch (error) {
-        res.json({ succuss: false, message: error.message })
+        res.json({ success: false, message: error.message })
     }
 }
 
