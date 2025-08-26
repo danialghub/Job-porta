@@ -77,7 +77,7 @@ const ApplyJob = () => {
   }, [id, jobData, userApplications])
 
 
-  return jobData && userApplications ? (
+  return jobData  ? (
     <>
       <Navbar />
 
