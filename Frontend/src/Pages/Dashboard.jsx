@@ -5,14 +5,8 @@ import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
 const Dashboard = () => {
     const navigate = useNavigate()
-    const { companyData, setCompanyData, setCompanyToken } = useContext(AppContext)
-    const logoutHandler = () => {
-        setCompanyData(null)
-        setCompanyToken(null)
-        localStorage.removeItem('companyToken')
-        navigate('/')
-        toast.success("successfully logout")
-    }
+    const { companyData, logoutHandler } = useContext(AppContext)
+
     useEffect(() => {
         if (companyData) {
             navigate('/dashboard/manage-jobs')
@@ -38,7 +32,7 @@ const Dashboard = () => {
                                     <ul className='list-none m-0 p-2 bg-white rounded-md border text-sm'>
                                         <li
                                             onClick={logoutHandler}
-                                            className='py-2 px-4 cursor-pointer pr-10'>Logout</li>
+                                            className='py-2 px-4 cursor-pointer pl-10'>Logout</li>
                                     </ul>
                                 </div>
                             </div>
@@ -79,7 +73,12 @@ const Dashboard = () => {
                     </ul>
                     {/* main content mounts from other pages */}
                 </div>
-                <Outlet />
+
+                <div className='flex-1'>
+
+                    <Outlet />
+                </div>
+
             </div>
         </div>
     )

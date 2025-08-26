@@ -2,18 +2,19 @@ import { createContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useUser, useAuth } from '@clerk/clerk-react'
+import { useNavigate } from 'react-router-dom'
 export const AppContext = createContext()
 
 const AppContextProvider = ({ children }) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL
-
+    const navigate = useNavigate()
     const { user } = useUser()
 
     const { getToken } = useAuth()
 
     const [searchFilter, setSearchFilter] = useState({ location: "", job: "" })
     const [isSearched, setIsSearched] = useState(false)
-    const [jobs, setJobs] = useState([])
+    const [jobs, setJobs] = useState(false)
     const [showRecruiterLogin, setShowRecruiterLogin] = useState(false)
     const [companyToken, setCompanyToken] = useState(null)
     const [companyData, setCompanyData] = useState(null)
@@ -42,7 +43,6 @@ const AppContextProvider = ({ children }) => {
             if (data.success) {
                 setCompanyData(data.company)
 
-
             } else {
                 toast.error(data.message)
             }
@@ -62,7 +62,6 @@ const AppContextProvider = ({ children }) => {
 
 
             if (data.succuss) {
-                console.log(data.user);
                 setUserData(data.user)
 
             } else {
@@ -79,10 +78,9 @@ const AppContextProvider = ({ children }) => {
             const { data } = await axios.get(backendUrl + '/api/users/applications', {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            
+
             if (data.succuss) {
                 setUserApplications(data.application)
-                console.log(data.application);
 
             } else {
                 toast.error(data.message)
@@ -91,6 +89,14 @@ const AppContextProvider = ({ children }) => {
             toast.error(error.message)
 
         }
+    }
+
+    const logoutHandler = () => {
+        setCompanyData(null)
+        setCompanyToken(null)
+        localStorage.removeItem('companyToken')
+        navigate('/')
+        toast.success("successfully logout")
     }
 
     useEffect(() => {
@@ -117,6 +123,7 @@ const AppContextProvider = ({ children }) => {
         searchFilter, setSearchFilter,
         isSearched, setIsSearched,
         jobs, setJobs,
+        getJobs,
         showRecruiterLogin, setShowRecruiterLogin,
         companyToken, setCompanyToken,
         companyData, setCompanyData,
@@ -124,7 +131,8 @@ const AppContextProvider = ({ children }) => {
         userData, setUserData,
         userApplications, setUserApplications,
         fetchUsersData,
-        fetchUserApplications
+        fetchUserApplications,
+        logoutHandler
 
     }
 

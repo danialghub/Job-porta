@@ -41,7 +41,7 @@ const AppRoutes = () => {
                     path: 'view-applications',
                     element: <ViewApplications />
                 },
-            ] : [{ path: "*", element: <h2 className='mx-auto mt-10 text-3xl font-bold text-gray-600'>You're not Allowed</h2> }]
+            ] : [{ path: "*", element: <h2 className='text-center mt-10 text-4xl font-bold text-gray-600'>You're not Allowed</h2> }]
         },
     ]
     const router = useRoutes(routes)

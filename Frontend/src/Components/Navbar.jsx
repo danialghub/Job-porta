@@ -8,30 +8,54 @@ const Navbar = () => {
     const { user } = useUser()
     const navigate = useNavigate()
 
-    const { setShowRecruiterLogin } = useContext(AppContext)
+    const { setShowRecruiterLogin, companyData, companyToken, logoutHandler } = useContext(AppContext)
 
     return (
         <div className='shadow py-4'>
             <div className='container px-4 2xl:px-20 flex justify-between items-center mx-auto'>
-                <img src={assets.logo} onClick={() => {navigate('/'); scrollTo(0,500)}} alt="" />
+                <img src={assets.logo} onClick={() => { navigate('/'); scrollTo(0, 500) }} alt="" />
                 {
                     user
-                        ? <div className='flex items-center gap-3'>
-                            <Link to="/applications">Applied Jobs</Link>
-                            <p>|</p>
-                            <p>Hi, {user.firstName + " " + user.lastName}</p>
-                            <UserButton />
-                        </div>
-                        :
-                        <div className='flex gap-4 max-sm:text-sm'>
-                            <button
-                                onClick={() => setShowRecruiterLogin(true)}
-                                className='text-gray-600'>Recruiter Login</button>
-                            <button
-                                onClick={() => openSignIn()}
-                                className='bg-blue-600 text-white px-6 sm:px-9 py-2 rounded-full'>Login</button>
-                        </div>
-                }
+                        ? (
+                            <div className='flex items-center gap-3'>
+                                <Link to="/applications">Applied Jobs</Link>
+                                <p>|</p>
+                                <p>Hi, {user.firstName + " " + user.lastName}</p>
+                                <UserButton />
+                            </div>
+                        ) : companyToken && companyData
+                            ? (<div className='flex items-center gap-3'>
+
+
+
+                                <p>Welcome Back, {companyData.name}</p>
+                                <p>|</p>
+                                <div className='relative group'>
+                                    <img
+                                        className='w-8 border rounded-full'
+                                        src={companyData.image} alt="" />
+
+                                    <div className='hidden absolute group-hover:block top-0 -right-5 z-10 text-black rounded pt-12 '>
+                                        <ul className='list-none m-0 p-2 bg-white rounded-md border text-sm shadow '>
+                                            <li className='py-2 px-4 cursor-pointer pr-10'>
+                                                <Link to="/dashboard">Dashboard</Link>
+                                            </li>
+                                            <li onClick={logoutHandler} className='py-2 px-4 cursor-pointer pr-10'>Logout</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>)
+                            : (
+                                <div className='flex gap-4 max-sm:text-sm'>
+                                    <button
+                                        onClick={() => setShowRecruiterLogin(true)}
+                                        className='text-gray-600'>Recruiter Login</button>
+                                    <button
+                                        onClick={() => openSignIn()}
+                                        className='bg-blue-600 text-white px-6 sm:px-9 py-2 rounded-full'>Login</button>
+                                </div>
+                            )}
 
             </div>
         </div>

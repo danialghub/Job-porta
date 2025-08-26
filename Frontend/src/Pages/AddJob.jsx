@@ -15,7 +15,7 @@ const AddJob = () => {
     const editorRef = useRef(null)
     const quillRef = useRef(null)
 
-    const { backendUrl, companyToken } = useContext(AppContext)
+    const { backendUrl, companyToken, getJobs } = useContext(AppContext)
 
     useEffect(() => {
         if (!quillRef.current && editorRef.current)
@@ -41,6 +41,7 @@ const AddJob = () => {
                 setTitle("")
                 setSalary(0)
                 quillRef.current.root.innerHTML = ""
+                getJobs()
             } else {
                 toast.error(data.message)
             }

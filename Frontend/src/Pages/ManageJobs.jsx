@@ -10,16 +10,14 @@ import Loader from '../Components/Loading'
 const ManageJobs = () => {
   const navigate = useNavigate()
   const [jobs, setJobs] = useState(false)
-  const { backendUrl, companyToken } = useContext(AppContext)
+  const { backendUrl, companyToken, getJobs } = useContext(AppContext)
 
   const fetchJobs = async () => {
     try {
       const { data } = await axios.get(backendUrl + '/api/company/list-jobs', { headers: { token: companyToken } })
 
-
       if (data.success) {
         setJobs(data.jobsData.reverse())
-        console.log(data.jobsData);
 
       } else {
         toast.error(data.message)
@@ -33,8 +31,9 @@ const ManageJobs = () => {
     try {
       const { data } = await axios.post(backendUrl + '/api/company/change-visiblity', { id }, { headers: { token: companyToken } })
       if (data.success) {
-        toast.success("The Job Visibility Status Changed Successfully")
+        toast.success("The Job Status Changed ")
         fetchJobs()
+        getJobs()
       } else {
         toast.success(data.message)
       }
@@ -47,9 +46,12 @@ const ManageJobs = () => {
       fetchJobs()
     }
   }, [companyToken])
-  return (
-    <>
-      {jobs ?
+  return jobs ? jobs.length === 0 ?
+    (<div className='flex items-center justify-center h-[90vh]'>
+      <p className='text-xl sm:text-2xl '>No Job Available or posted</p>
+    </div>) : (
+      <>
+
         <div className='container p-4 max-w-5xl'>
           <div className='overflow-x-auto'>
             <table className='min-w-full bg-white border border-gray-200 max-sm:text-sm'>
@@ -88,10 +90,10 @@ const ManageJobs = () => {
               className='bg-black text-white py-2 px-4 rounded'>Add new job</button>
           </div>
         </div>
-        : <Loader />
-      }
-    </>
-  )
+
+
+      </>
+    ) : <Loader />
 }
 
 export default ManageJobs

@@ -50,14 +50,14 @@ const ApplyJob = () => {
         headers: { Authorization: `Bearer ${token}` }
       })
       if (data.success) {
-        toast.success("job Successfully applied")
         fetchUserApplications()
+       return toast.success("job Successfully applied")
 
       } else {
         toast.error(data.message)
       }
     } catch (error) {
-      return toast.error(error.message)
+       toast.error(error.message)
     }
   }
   const checkAlreadyExist = async () => {

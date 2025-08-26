@@ -4,7 +4,6 @@ import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Loader from './Loading'
 
 const RecruiterLogin = () => {
     const navigate = useNavigate()

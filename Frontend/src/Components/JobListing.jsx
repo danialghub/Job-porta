@@ -23,19 +23,23 @@ const JobListing = () => {
     }
     //handling filtered jobs
     useEffect(() => {
-        const matchedCategories = job => !seletedCategories.length || seletedCategories.includes(job.category)
+        if (jobs) {
+            setFilteredJobs(jobs)
 
-        const matchedLocations = job => !seletedLocations.length || seletedLocations.includes(job.location)
+            const matchedCategories = job => !seletedCategories.length || seletedCategories.includes(job.category)
 
-        const mathedTitle = job => !searchFilter.job || job.title.toLowerCase().includes(searchFilter.job.toLowerCase())
+            const matchedLocations = job => !seletedLocations.length || seletedLocations.includes(job.location)
 
-        const matchedSearchLocation = job => !searchFilter.location || job.location.toLowerCase().includes(searchFilter.location.toLowerCase())
+            const mathedTitle = job => !searchFilter.job || job.title.toLowerCase().includes(searchFilter.job.toLowerCase())
 
-        const newFilteredJobs = jobs.slice().reverse().filter(job =>
-            matchedCategories(job) && matchedLocations(job) && mathedTitle(job) && matchedSearchLocation(job)
-        )
-        setFilteredJobs(newFilteredJobs)
-        setCurrentPage(1)
+            const matchedSearchLocation = job => !searchFilter.location || job.location.toLowerCase().includes(searchFilter.location.toLowerCase())
+
+            const newFilteredJobs = jobs.slice().reverse().filter(job =>
+                matchedCategories(job) && matchedLocations(job) && mathedTitle(job) && matchedSearchLocation(job)
+            )
+            setFilteredJobs(newFilteredJobs)
+            setCurrentPage(1)
+        }
 
 
     }, [seletedCategories, seletedLocations, searchFilter, jobs])
@@ -127,52 +131,56 @@ const JobListing = () => {
 
             </div>
             {/* Job List */}
-            {jobs.length ? <section className=' w-full lg-w-3/4 text-gray-800 max-lg:px-4' id='job_list'>
-                <h3 className='font-medium text-3xl py-2'>Latest Jobs</h3>
-                <p className='mb-8'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci sequi ea voluptatibus inventore, enim error.</p>
+            {jobs ? !filteredJobs || filteredJobs.length == 0 ?
+                (<div className='flex-1 flex items-center justify-center h-[90vh]'>
+                    <p className='text-xl sm:text-3xl text-gray-700 text-bold'>No Job Available or posted</p>
+                </div>)
+                :
 
-                {!filteredJobs.length && (
-                    <h3 className='font-bold text-3xl '>there are no information...</h3>
-                )}
-
-                <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
-                    {filteredJobs.slice((currentPage - 1) * 6, (currentPage) * 6).map(data => (
-                        <JobCard key={data._id} {...data} />
-                    ))
-
-                    }
-                </div>
-                {/* Pagination */}
-                {filteredJobs.length > 0 && (
-                    <div className='flex justify-center items-center space-x-2 mt-10  '>
-                        <a onClick={e => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                            href="#job_list"
-                            className={`w-10 h-10  flex justify-center items-center rounded ${currentPage - 1 == 0 ? 'bg-gray-400 pointer-events-none' : 'bg-gray-700 '}`}
-                        >
-                            <RiArrowLeftSLine className='font-bolder text-2xl text-white' />
+                <section className=' w-full lg-w-3/4 text-gray-800 max-lg:px-4' id='job_list'>
+                    <h3 className='font-medium text-3xl py-2'>Latest Jobs</h3>
+                    <p className='mb-8'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci sequi ea voluptatibus inventore, enim error.</p>
 
 
-                        </a>
-                        {Array.from({ length: Math.ceil(filteredJobs.length / 6) }).map((_, idx) => (
-                            <a key={idx} href="#job_list" onClick={e => setCurrentPage(idx + 1)}>
-                                <button
-                                    className={`w-10 h-10 flex items-center justify-center border border-gray-300 rounded text-white ${currentPage == idx + 1 ? "bg-blue-500" : "bg-gray-600"}`}
-                                >{idx + 1}</button>
-                            </a>
+
+                    <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
+                        {filteredJobs.slice((currentPage - 1) * 6, (currentPage) * 6).map(data => (
+                            <JobCard key={data._id} {...data} />
                         ))
 
                         }
-                        <a
-                            onClick={e => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredJobs.length / 6)))}
-                            href="#job_list"
-                            className={`w-10 h-10  flex justify-center items-center rounded ${currentPage - 1 == Math.ceil(filteredJobs.length / 6) - 1 ? 'bg-gray-400 pointer-events-none' : 'bg-gray-700 '}`}
-                        >
-                            <RiArrowRightSLine className='font-bolder text-2xl text-white' />
-                        </a>
                     </div>
-                )
-                }
-            </section>
+                    {/* Pagination */}
+                    {filteredJobs.length > 0 && (
+                        <div className='flex justify-center items-center space-x-2 mt-10  '>
+                            <a onClick={e => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                href="#job_list"
+                                className={`w-10 h-10  flex justify-center items-center rounded ${currentPage - 1 == 0 ? 'bg-gray-400 pointer-events-none' : 'bg-gray-700 '}`}
+                            >
+                                <RiArrowLeftSLine className='font-bolder text-2xl text-white' />
+
+
+                            </a>
+                            {Array.from({ length: Math.ceil(filteredJobs.length / 6) }).map((_, idx) => (
+                                <a key={idx} href="#job_list" onClick={e => setCurrentPage(idx + 1)}>
+                                    <button
+                                        className={`w-10 h-10 flex items-center justify-center border border-gray-300 rounded text-white ${currentPage == idx + 1 ? "bg-blue-500" : "bg-gray-600"}`}
+                                    >{idx + 1}</button>
+                                </a>
+                            ))
+
+                            }
+                            <a
+                                onClick={e => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredJobs.length / 6)))}
+                                href="#job_list"
+                                className={`w-10 h-10  flex justify-center items-center rounded ${currentPage - 1 == Math.ceil(filteredJobs.length / 6) - 1 ? 'bg-gray-400 pointer-events-none' : 'bg-gray-700 '}`}
+                            >
+                                <RiArrowRightSLine className='font-bolder text-2xl text-white' />
+                            </a>
+                        </div>
+                    )
+                    }
+                </section>
                 : <Loarder />
             }
 
