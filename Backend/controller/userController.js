@@ -7,10 +7,12 @@ import { v2 as cloudinary } from 'cloudinary'
 export const getUserData = async (req, res) => {
     const userId = req.auth().userId
 
+
     try {
         const user = await User.findById(userId)
+
         if (!user) {
-            return res.json({ succuss: false, message: "User Not Found!" })
+            return res.json({ succuss: false, message: "کاربری پیدا نشد" })
         }
         res.json({ succuss: true, user })
     } catch (error) {
@@ -29,12 +31,12 @@ export const applyForJob = async (req, res) => {
         const isAlreadyApplied = await JobApplication.find({ jobId, userId })
 
         if (isAlreadyApplied.length) {
-            return res.json({ succuss: false, message: "Already Applied!" })
+            return res.json({ succuss: true, message: "درخواست داده شد" })
         }
         const jobData = await Job.findById(jobId)
 
         if (!jobData) {
-            return res.json({ succuss: false, message: "Job Not Found!" })
+            return res.json({ succuss: false, message: "کار پیدا نشد" })
         }
         await JobApplication.create({
             companyId: jobData.companyId,
@@ -42,7 +44,7 @@ export const applyForJob = async (req, res) => {
             jobId,
             date: Date.now()
         })
-       return res.json({ succuss: true, message: "Applied Successfully" })
+        return res.json({ succuss: true, message: "با موفقیت درخواست داده شد" })
     } catch (error) {
         res.json({ succuss: false, message: error.message })
     }
@@ -54,13 +56,14 @@ export const getUserJobApplications = async (req, res) => {
     try {
 
         const userId = req.auth().userId
+        console.log(userId);
 
         const application = await JobApplication.find({ userId })
             .populate('companyId', 'name email image')
             .populate('jobId', 'title description location category level salary')
             .exec()
         if (!application.length) {
-            return res.json({ succuss: false, message: "No job Applications found for this user!" })
+            return res.json({ succuss: false, message: "هیچ درخواست کاری برای این کاربر پیدا نشد" })
         }
         return res.json({ succuss: true, application })
     } catch (error) {
@@ -81,9 +84,9 @@ export const updateUserResume = async (req, res) => {
             const resumeUpload = await cloudinary.uploader.upload(resumeFile.path)
             userData.resume = resumeUpload.secure_url
             await userData.save()
-            return res.json({ succuss: true, message: "Resume Updated!" })
+            return res.json({ succuss: true, message: "رزومه بروزشد" })
         } else {
-            res.json({ succuss: false, message: "Resume didn't Upload" })
+            res.json({ succuss: false, message: "رزومه آپدیت نشد" })
         }
 
     } catch (error) {

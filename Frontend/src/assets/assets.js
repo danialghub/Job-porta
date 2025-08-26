@@ -73,23 +73,23 @@ export const assets = {
 }
 
 export const JobCategories = [
-    "Programming",
-    "Data Science",
-    "Designing",
-    "Networking",
-    "Management",
-    "Marketing",
-    "Cybersecurity",
+    "برنامه نویسی",
+    "علم داده",
+    "طراحی",
+    "شبکه",
+    "مدیریت",
+    "بازاریابی",
+    "امنیت سایبری",
 ]
 
 export const JobLocations = [
-    "Bangalore",
-    "Washington",
-    "Hyderabad",
-    "Mumbai",
-    "California",
-    "Chennai",
-    "New York"
+    "تهران",
+    "مازندران",
+    "همدان",
+    "کالیفرنیا",
+    "لندن",
+    "نیویورک",
+    "شیراز"
 ]
 
 // Sample data for Manage Jobs Page

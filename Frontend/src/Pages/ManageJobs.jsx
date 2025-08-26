@@ -20,10 +20,10 @@ const ManageJobs = () => {
         setJobs(data.jobsData.reverse())
 
       } else {
-        toast.error(data.message)
+        toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
     }
 
   }
@@ -31,14 +31,14 @@ const ManageJobs = () => {
     try {
       const { data } = await axios.post(backendUrl + '/api/company/change-visiblity', { id }, { headers: { token: companyToken } })
       if (data.success) {
-        toast.success("The Job Status Changed ")
+        toast.success(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
         fetchJobs()
         getJobs()
       } else {
-        toast.success(data.message)
+        toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
       }
     } catch (error) {
-      toast.success(error.message)
+      toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
     }
   }
   useEffect(() => {
@@ -48,7 +48,7 @@ const ManageJobs = () => {
   }, [companyToken])
   return jobs ? jobs.length === 0 ?
     (<div className='flex items-center justify-center h-[90vh]'>
-      <p className='text-xl sm:text-2xl '>No Job Available or posted</p>
+      <p className='text-xl sm:text-2xl '>هیچ کاری در دسترس نیست یا پست نشده</p>
     </div>) : (
       <>
 
@@ -57,12 +57,12 @@ const ManageJobs = () => {
             <table className='min-w-full bg-white border border-gray-200 max-sm:text-sm'>
               <thead>
                 <tr>
-                  <th className='px-4 py-2 border-b text-left max-sm:hidden'>#</th>
-                  <th className='px-4 py-2 border-b text-left'>Job Title</th>
-                  <th className='px-4 py-2 border-b text-left max-sm:hidden'>Date</th>
-                  <th className='px-4 py-2 border-b text-left max-sm:hidden'>Location</th>
-                  <th className='px-4 py-2 border-b text-center'>Applicants</th>
-                  <th className='px-4 py-2 border-b text-left'>visible</th>
+                  <th className='px-4 py-2 border-b text-right max-sm:hidden'>#</th>
+                  <th className='px-4 py-2 border-b text-right'>عنوان کار</th>
+                  <th className='px-4 py-2 border-b text-right max-sm:hidden'>تاریخ</th>
+                  <th className='px-4 py-2 border-b text-right max-sm:hidden'>مکان</th>
+                  <th className='px-4 py-2 border-b text-center'>تعداد درخواستی ها</th>
+                  <th className='px-4 py-2 border-b text-right'>وضعیت نمایش</th>
                 </tr>
               </thead>
               <tbody>
@@ -75,7 +75,7 @@ const ManageJobs = () => {
                     <td className='px-4 py-2 border-b text-center '>{item.applicants}</td>
                     <td className='px-4 py-2 border-b  '>
                       <input
-                        onClick={() => changeJobVisibility(item._id)}
+                        onChange={() => changeJobVisibility(item._id)}
                         checked={item.visible} className='scale-125 ml-4' type="checkbox" />
                     </td>
                   </tr>
@@ -84,10 +84,10 @@ const ManageJobs = () => {
               </tbody>
             </table>
           </div>
-          <div className='mt-4 flex justify-end'>
+          <div className='mt-6 flex justify-end'>
             <button
               onClick={() => navigate('/dashboard/add-job')}
-              className='bg-black text-white py-2 px-4 rounded'>Add new job</button>
+              className='bg-black/70 text-white py-2 px-8 rounded'>ایجاد کار</button>
           </div>
         </div>
 

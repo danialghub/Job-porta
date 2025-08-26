@@ -37,26 +37,27 @@ const AddJob = () => {
                 location,
             }, { headers: { token: companyToken } })
             if (data.success) {
-                toast.success("a new Job Successufully Added")
+                toast.success("a new Job Successufully Added", { className: "max-sm:w-[90vw] mt-5 mx-auto" })
                 setTitle("")
                 setSalary(0)
                 quillRef.current.root.innerHTML = ""
                 getJobs()
             } else {
-                toast.error(data.message)
+                toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
 
         }
     }
 
+
     return (
-        <form className='container max-w-5xl p-4 flex flex-col w-full items-start gap-3'>
+        <form className='container max-w-5xl p-4 flex flex-col w-full items-start gap-5'>
             <div className='w-full'>
-                <p className='mb-2 text-gray-600'>Job Title</p>
+                <p className='mb-2 text-gray-600'>عنوان کار</p>
                 <input
-                    placeholder='Type here'
+                    placeholder='عنوان'
                     onChange={e => setTitle(e.target.value)}
                     value={title}
                     type="text"
@@ -64,14 +65,15 @@ const AddJob = () => {
                 />
             </div>
             <div className='w-full max-w-lg'>
-                <p className='my-2 text-gray-600'>Job Description</p>
+                <p className='my-2 text-gray-600'>توضیحات کار</p>
                 <div ref={editorRef}></div>
+
             </div>
-            <div className='flex flex-col sm:flex-row w-full  items-center gap-2 sm:gap-8'>
-                <div>
-                    <p className='mb-2 text-gray-600'>Job Category</p>
+            <div className='flex flex-col items-start sm:flex-row w-full  sm:items-center gap-8 sm:gap-8'>
+                <div className='w-full'>
+                    <p className='mb-2 text-gray-600'>دسته بندی کار</p>
                     <select
-                        className='w-full px-3 py-2 border-2 border-gray-300 rounded'
+                        className='w-full px-3 py-2 border-2 border-gray-300 rounded  outline-none'
                         value={category}
                         onChange={e => setCategory(e.target.value)}>
                         {JobCategories.map((item, idx) => (
@@ -81,10 +83,10 @@ const AddJob = () => {
                         }
                     </select>
                 </div>
-                <div>
-                    <p className='mb-2 text-gray-600'>Job Location</p>
+                <div className='w-full'>
+                    <p className='mb-2 text-gray-600'>مکان کار</p>
                     <select
-                        className='w-full px-3 py-2 border-2 border-gray-300 rounded'
+                        className='w-full px-3 py-2 border-2 border-gray-300 rounded  outline-none'
                         value={location}
                         onChange={e => setLocation(e.target.value)}>
                         {JobLocations.map((item, idx) => (
@@ -94,23 +96,23 @@ const AddJob = () => {
                         }
                     </select>
                 </div>
-                <div>
-                    <p className='mb-2 text-gray-600'>Job Category</p>
+                <div className='w-full'>
+                    <p className='mb-2 text-gray-600'>سطح کار</p>
                     <select
-                        className='w-full px-3 py-2 border-2 border-gray-300 rounded'
+                        className='w-full  px-3 py-2 border-2 border-gray-300 rounded outline-none'
                         value={level}
                         onChange={e => setLevel(e.target.value)}>
 
-                        <option value='Beginner level'>Beginner level</option>
-                        <option value='Intermediate level'>Intermediate level</option>
-                        <option value='Senior level'>Senior level</option>
+                        <option value='سطح مبتدی'>سطح مبتدی</option>
+                        <option value='سطح جونیور'>سطح جونیور</option>
+                        <option value='سطح سنیور'>سطح سنیور</option>
 
                     </select>
                 </div>
             </div>
 
-            <div>
-                <p className='mb-2 text-gray-600'>Job Salary</p>
+            <div className=''>
+                <p className='mb-2 text-gray-600'>حقوق کار</p>
                 <input
                     value={salary}
                     className='w-full px-3 py-2 border-2 border-gray-300 rounded sm:w-[120px]'
@@ -120,7 +122,7 @@ const AddJob = () => {
             </div>
             <button
                 onClick={onSubmitHandler}
-                className='w-28 py-2 mt-4 bg-gray-800 text-white rounded'>ADD</button>
+                className='w-28 py-2 mt-4 bg-gray-800 text-white rounded'>ایجاد</button>
 
         </form>
     )

@@ -18,10 +18,10 @@ const JobCard = ({ _id, location, title, level, description, companyId }) => {
                 <div className='flex  mt-4 gap-4 text-sm'>
                     <button
                         onClick={() => { navigate(`/apply-job/${_id}`); scrollTo(0, 0) }}
-                        className='bg-blue-600 rounded text-white px-4 py-2'>Apply Now</button>
+                        className='bg-blue-600 rounded text-white px-4 py-2'>درخواست کار</button>
                     <button
                         onClick={() => { navigate(`/apply-job/${_id}`); scrollTo(0, 0) }}
-                        className='text-gray-500 border border-gray-500 rounded px-4 py-2'>Learn More</button>
+                        className='text-gray-500 border border-gray-500 rounded px-4 py-2'>جزئیات بیشتر</button>
                 </div>
             </div>
         </div>

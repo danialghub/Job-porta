@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 const RecruiterLogin = () => {
     const navigate = useNavigate()
-    const [state, setState] = useState('Login')
+    const [state, setState] = useState('ورود')
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -23,12 +23,12 @@ const RecruiterLogin = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        if (state == "Sign Up" && !isTextDataSubmited) {
+        if (state == "ثبت نام" && !isTextDataSubmited) {
             return setIsTextDataSubmited(true)
         }
         try {
 
-            if (state == "Login") {
+            if (state == "ورود") {
                 const { data } = await axios.post(backendUrl + "/api/company/login", { email, password })
                 if (data.success) {
                     setCompanyData(data.company)
@@ -36,10 +36,10 @@ const RecruiterLogin = () => {
                     localStorage.setItem('companyToken', data.token)
                     setShowRecruiterLogin(false)
                     navigate('/dashboard')
-                    toast.success("Login Succssesfully")
+                    toast.success("Login Succssesfully", { className: "max-sm:w-[90vw] mt-5 mx-auto" })
 
                 } else {
-                    toast.error("Invalid Email Or Password!")
+                    toast.error("Invalid Email Or Password!", { className: "max-sm:w-[90vw] mt-5 mx-auto" })
                 }
             } else {
                 const formData = new FormData()
@@ -55,15 +55,15 @@ const RecruiterLogin = () => {
                     localStorage.setItem('companyToken', data.token)
                     setShowRecruiterLogin(false)
                     navigate('/dashboard')
-                    toast.success("Your Account Succssesfully Registered")
+                    toast.success("Your Account Succssesfully Registered", { className: "max-sm:w-[90vw] mt-5 mx-auto" })
 
                 } else {
-                    toast.error(data.message)
+                    toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
                 }
             }
 
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
         }
     }
 
@@ -79,9 +79,9 @@ const RecruiterLogin = () => {
                 onSubmit={onSubmit}
                 className='relative bg-white p-10 rounded-xl text-slate-500'
             >
-                <h1 className='text-center text-neutral-700 font-medium text-2xl'>Recruiter {state}</h1>
-                <p className='text-sm'>Welcome Back! please Sign In to continue</p>
-                {state == "Sign Up" && isTextDataSubmited ? (
+                <h1 className='text-center text-neutral-700 font-medium text-2xl'> {state}</h1>
+                <p className='text-sm my-2'>خوش برگشتید! لطفا برای ادامه وارد شوید</p>
+                {state == "ثبت نام" && isTextDataSubmited ? (
                     <>
                         <div className='flex items-center gap-4 my-10'>
                             <label htmlFor="company_logo">
@@ -91,60 +91,61 @@ const RecruiterLogin = () => {
                                     onChange={e => setImage(e.target.files[0])}
                                     hidden id="company_logo" />
                             </label>
-                            <p>Upload Logo </p>
+                            <p>آپلود لوگو </p>
                         </div>
                     </>
                 ) : (
                     <>
-                        {state !== "Login" && (
-                            <div className='border px-4 py-2 flex items-center gap-2 rounded-full mt-5'>
+                        {state !== "ورود" && (
+                            <div  className='border px-4 py-2 flex items-center gap-2 rounded-full mt-5'>
                                 <img src={assets.person_icon} alt="" />
                                 <input
+                                    
                                     className='outline-none text-sm'
                                     onChange={e => setName(e.target.value)}
                                     value={name}
-                                    type="text" placeholder='Company Name' required />
+                                    type="text" placeholder='نام شرکت' required />
                             </div>
                         )}
-                        <div className='border px-4 py-2 flex items-center gap-2 rounded-full mt-5'>
+                        <div dir='ltr' className='border px-4 py-2 flex items-center gap-2 rounded-full mt-5'>
                             <img src={assets.email_icon} alt="" />
                             <input
                                 className='outline-none text-sm'
                                 onChange={e => setEmail(e.target.value)}
                                 value={email}
-                                type="email" placeholder='Email Id' required />
+                                type="email" placeholder='ایمیل' required />
                         </div>
-                        <div className='border px-4 py-2 flex items-center gap-2 rounded-full mt-5'>
+                        <div dir='ltr' className='border px-4 py-2 flex items-center gap-2 rounded-full mt-5'>
                             <img src={assets.lock_icon} alt="" />
                             <input
                                 className='outline-none text-sm'
                                 onChange={e => setPassword(e.target.value)}
                                 value={password}
-                                type="password" placeholder='Password' required />
+                                type="password" placeholder='پسورد' required />
                         </div>
                     </>
                 )}
 
-                {state == "Login" && <p className='text-sm text-blue-600 cursor-pointer my-4'>Forgot Password?</p>}
+                {state == "ورود" && <p className='text-sm text-blue-600 cursor-pointer my-4'>اکانتتو فراموش کردی؟</p>}
                 <button className='bg-blue-600 w-full text-white py-2 rounded-full mt-4'>
                     {
-                        state == "Login" ? 'login' : isTextDataSubmited ? 'create account' : "next"
+                        state == "وارد" ? 'وارد' : isTextDataSubmited ? 'ساخت اکانت' : "مرحله بعد"
                     }
                 </button>
-                {state == "Login"
+                {state == "ورود"
                     ? (
-                        <p className='mt-5 text-center'>Don't have an account?
+                        <p className='mt-5 text-center'>اکانتی نداری؟
                             <span
-                                className='text-blue-600 cursor-pointer ml-1'
-                                onClick={() => setState("Sign Up")}
-                            >Sign Up</span>
+                                className='text-blue-600 cursor-pointer mr-1'
+                                onClick={() => setState("ثبت نام")}
+                            >ثبت نام</span>
                         </p>
                     ) : (
-                        <p className='mt-5 text-center'>Already have an account?
+                        <p className='mt-5 text-center'>از قبل اکانتی داری؟
                             <span
-                                className='text-blue-600 cursor-pointer ml-1'
-                                onClick={() => setState("Login")}
-                            >Login</span>
+                                className='text-blue-600 cursor-pointer mr-1'
+                                onClick={() => setState("ورود")}
+                            >ورود</span>
                         </p>
                     )}
 

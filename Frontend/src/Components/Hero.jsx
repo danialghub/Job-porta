@@ -14,7 +14,7 @@ const Hero = () => {
             location: locRef.current.value
         })
         setIsSearched(true)
-        
+
 
 
     }
@@ -23,15 +23,15 @@ const Hero = () => {
         <div className='container mx-auto my-10  2xl:px-20 '>
             <div className='bg-gradient-to-r from-purple-800 to-purple-950 py-16 text-center rounded-xl text-white'>
                 <div className='mb-8'>
-                    <h2 className='text-2xl md:text-3xl lg:text-4xl font-medium mb-4'>Over 10,000 Jobs to apply</h2>
-                    <p className='text-sm max-w-xl mx-auto font-light px-5'>Your big next carrer move starts right here - Explore the best job Opportunities and take the step toward to your future!</p>
+                    <h2 className='text-2xl md:text-3xl lg:text-4xl font-medium mb-4'>بیش از 10 هزار نفر پذیرش</h2>
+                    <p className='text-sm max-w-xl mx-auto font-light px-5'>قدم بزرگ بعدی زندگی کاریت در اینجا آغاز میشود - بهترین موقیعت شغلی را پیدا کند و آیندتو بساز</p>
                 </div>
                 <div className='flex justify-between items-center max-w-xl  p-2 rounded bg-white mx-4 sm:mx-auto pl-4 text-gray-600 '>
                     <div className='flex items-center gap-1 '>
                         <img className='h-4 sm:h-5 pointer-events-none' src={assets.search_icon} alt="Job" />
                         <input
                             type="text"
-                            placeholder='type your job!'
+                            placeholder='فیلتر بر اساس شغل'
                             className='outline-none rounded w-full max-sm:w-3/4'
                             ref={jobRef}
                         />
@@ -40,22 +40,21 @@ const Hero = () => {
                         <img className='h-4 sm:h-5' src={assets.location_icon} alt="Loc" />
                         <input
                             type="text"
-                            placeholder='type your Location!' 
+                            placeholder='فیلتر بر اساس مکان'
                             className='outline-none rounded w-full max-sm:w-3/4'
                             ref={locRef}
-                            
-            
+
                         />
                     </div >
                     <button
                         className='py-2 px-6 max-sm:px-3 max-sm:py-1 text-white  bg-blue-600 rounded'
                         onClick={onSearch}
-                    >Search</button>
+                    >جستجو</button>
                 </div>
             </div>
             <div className='shadow-md border-gray-300 p-6 mt-5 mx-2 border rounded flex'>
                 <div className='flex justify-center gap-10 lg:gap-16 flex-wrap '>
-                    <p className='font-medium'>Trusted by</p>
+                    <p className='text-lg'>مورد اعتماد </p>
                     <img className='h-6' src={assets.microsoft_logo} alt="" />
                     <img className='h-6' src={assets.walmart_logo} alt="" />
                     <img className='h-6' src={assets.accenture_logo} alt="" />

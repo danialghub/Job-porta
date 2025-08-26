@@ -3,6 +3,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useUser, useAuth } from '@clerk/clerk-react'
 import { useNavigate } from 'react-router-dom'
+
 export const AppContext = createContext()
 
 const AppContextProvider = ({ children }) => {
@@ -20,9 +21,7 @@ const AppContextProvider = ({ children }) => {
     const [companyData, setCompanyData] = useState(null)
 
     const [userData, setUserData] = useState(null)
-    const [userApplications, setUserApplications] = useState([])
-
-
+    const [userApplications, setUserApplications] = useState(false)
 
     const getJobs = async () => {
         try {
@@ -30,10 +29,10 @@ const AppContextProvider = ({ children }) => {
             if (data.success) {
                 setJobs(data.jobs)
             } else {
-                toast.error(data.message)
+                toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
 
         }
     }
@@ -44,11 +43,11 @@ const AppContextProvider = ({ children }) => {
                 setCompanyData(data.company)
 
             } else {
-                toast.error(data.message)
+                toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
             }
 
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
         }
     }
     const fetchUsersData = async () => {
@@ -56,25 +55,28 @@ const AppContextProvider = ({ children }) => {
             const token = await getToken()
 
 
+
             const { data } = await axios.get(backendUrl + '/api/users/user', {
                 headers: { Authorization: `Bearer ${token}` }
             })
 
-
+            console.log(data);
             if (data.succuss) {
                 setUserData(data.user)
 
             } else {
-                toast.error(data.message)
+                toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
 
         }
     }
     const fetchUserApplications = async () => {
         try {
             const token = await getToken()
+            console.log(token);
+            
             const { data } = await axios.get(backendUrl + '/api/users/applications', {
                 headers: { Authorization: `Bearer ${token}` }
             })
@@ -83,10 +85,10 @@ const AppContextProvider = ({ children }) => {
                 setUserApplications(data.application)
 
             } else {
-                toast.error(data.message)
+                setUserApplications([])
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
 
         }
     }
@@ -96,7 +98,7 @@ const AppContextProvider = ({ children }) => {
         setCompanyToken(null)
         localStorage.removeItem('companyToken')
         navigate('/')
-        toast.success("successfully logout")
+        toast.success("با موفقیت خارج شدید", { className: "max-sm:w-[90vw] mt-5 mx-auto" })
     }
 
     useEffect(() => {

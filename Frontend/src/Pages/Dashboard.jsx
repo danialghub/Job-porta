@@ -6,7 +6,11 @@ import { toast } from 'react-toastify'
 const Dashboard = () => {
     const navigate = useNavigate()
     const { companyData, logoutHandler } = useContext(AppContext)
-
+    const navMenu = [
+        { title: 'ایجاد کار', route: '/dashboard/add-job', icon: assets.add_icon },
+        { title: 'مدیریت کارها', route: '/dashboard/manage-jobs', icon: assets.home_icon },
+        { title: 'مشاهده درخواست ها', route: '/dashboard/view-applications', icon: assets.person_tick_icon },
+    ]
     useEffect(() => {
         if (companyData) {
             navigate('/dashboard/manage-jobs')
@@ -23,16 +27,21 @@ const Dashboard = () => {
                         src={assets.logo} alt="" />
                     {companyData && (
                         <div className='flex items-center gap-3'>
-                            <p className='max-sm:hidden'>Welcome, {companyData.name}</p>
+                            <p >خوش آمدی, {companyData.name}</p>
                             <div className='relative group'>
                                 <img
                                     className='w-8 border rounded-full'
                                     src={companyData.image} alt="" />
-                                <div className='hidden absolute group-hover:block top-0 right-0 z-10 text-black rounded pt-12'>
-                                    <ul className='list-none m-0 p-2 bg-white rounded-md border text-sm'>
+                                <div className='hidden absolute group-hover:block top-0 left-0 z-10 text-black rounded pt-12'>
+                                    <ul className='list-none m-0 p-2 bg-white rounded-md border text-sm shadow'>
+                                        <li
+                                            onClick={() => navigate('/')}
+                                            className='py-2 px-4 cursor-pointer '>خانه
+                                        </li>
                                         <li
                                             onClick={logoutHandler}
-                                            className='py-2 px-4 cursor-pointer pl-10'>Logout</li>
+                                            className='py-2 px-4 cursor-pointer '>خروج
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -46,30 +55,17 @@ const Dashboard = () => {
                 {/* left Sidebar  */}
                 <div className='inline-block min-h-screen border-r-2 '>
                     <ul className='flex flex-col items-start pt-5 text-gray-800'>
-                        <NavLink
-                            className={({ isActive }) => `flex items-center p-3 sm:px-6 gap-2 w-full hover:bg-gray-100 ${isActive && "bg-blue-100 border-r-4 border-blue-500 "}`}
-                            to="/dashboard/add-job">
-                            <img
-                                className='min-w-4'
-                                src={assets.add_icon} alt="" />
-                            <p className='max-sm:hidden'>Add Job</p>
-                        </NavLink>
-                        <NavLink
-                            className={({ isActive }) => `flex items-center p-3 sm:px-6 gap-2 w-full hover:bg-gray-100 ${isActive && "bg-blue-100 border-r-4 border-blue-500 "}`}
-                            to="/dashboard/manage-jobs">
-                            <img
-                                className='min-w-4'
-                                src={assets.home_icon} alt="" />
-                            <p className='max-sm:hidden'>Manage Jobs</p>
-                        </NavLink>
-                        <NavLink
-                            className={({ isActive }) => `flex items-center p-3 sm:px-6 gap-2 w-full hover:bg-gray-100 ${isActive && "bg-blue-100 border-r-4 border-blue-500 "}`}
-                            to="/dashboard/view-applications">
-                            <img
-                                className='min-w-4'
-                                src={assets.person_tick_icon} alt="" />
-                            <p className='max-sm:hidden'>View Applications</p>
-                        </NavLink>
+                        {navMenu.map((menu, idx) => (
+                            <NavLink
+                                key={idx}
+                                className={({ isActive }) => `flex items-center p-3 sm:px-6 gap-2 w-full hover:bg-gray-100 ${isActive && "bg-blue-100 border-l-4 border-blue-500 "}`}
+                                to={menu.route}>
+                                <img
+                                    className='min-w-4'
+                                    src={menu.icon} alt="" />
+                                <p className='max-sm:hidden'>{menu.title}</p>
+                            </NavLink>
+                        ))}
                     </ul>
                     {/* main content mounts from other pages */}
                 </div>

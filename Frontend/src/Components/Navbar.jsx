@@ -12,35 +12,37 @@ const Navbar = () => {
 
     return (
         <div className='shadow py-4'>
-            <div className='container px-4 2xl:px-20 flex justify-between items-center mx-auto'>
-                <img src={assets.logo} onClick={() => { navigate('/'); scrollTo(0, 500) }} alt="" />
+            <div className='container px-4 2xl:px-20 flex justify-between items-center mx-auto '>
+                <img
+                    className='max-sm:w-32 cursor-pointer'
+                    src={assets.logo} onClick={() => { navigate('/'); scrollTo(0, 500) }} alt="" />
                 {
                     user
                         ? (
-                            <div className='flex items-center gap-3'>
-                                <Link to="/applications">Applied Jobs</Link>
+                            <div className='flex items-center gap-3 max-sm:gap-2 max-sm:text-sm'>
+                                <Link to="/applications">شغلی های درخواستی</Link>
                                 <p>|</p>
-                                <p>Hi, {user.firstName + " " + user.lastName}</p>
+                                <p>سلام, {user.firstName + " " + user.lastName}</p>
                                 <UserButton />
                             </div>
                         ) : companyToken && companyData
-                            ? (<div className='flex items-center gap-3'>
+                            ? (<div className='flex items-center gap-3 max-sm:text-sm'>
 
 
 
-                                <p>Welcome Back, {companyData.name}</p>
+                                <p >خوش آمدی ,{companyData.name}</p>
                                 <p>|</p>
                                 <div className='relative group'>
                                     <img
                                         className='w-8 border rounded-full'
                                         src={companyData.image} alt="" />
 
-                                    <div className='hidden absolute group-hover:block top-0 -right-5 z-10 text-black rounded pt-12 '>
+                                    <div className='hidden absolute group-hover:block top-0 -left-5 z-10 text-black rounded pt-12 '>
                                         <ul className='list-none m-0 p-2 bg-white rounded-md border text-sm shadow '>
                                             <li className='py-2 px-4 cursor-pointer pr-10'>
-                                                <Link to="/dashboard">Dashboard</Link>
+                                                <Link to="/dashboard">داشبورد</Link>
                                             </li>
-                                            <li onClick={logoutHandler} className='py-2 px-4 cursor-pointer pr-10'>Logout</li>
+                                            <li onClick={logoutHandler} className='py-2 px-4 cursor-pointer pr-10'>خروج</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -50,10 +52,10 @@ const Navbar = () => {
                                 <div className='flex gap-4 max-sm:text-sm'>
                                     <button
                                         onClick={() => setShowRecruiterLogin(true)}
-                                        className='text-gray-600'>Recruiter Login</button>
+                                        className='text-gray-600'>ورود کارفرما</button>
                                     <button
                                         onClick={() => openSignIn()}
-                                        className='bg-blue-600 text-white px-6 sm:px-9 py-2 rounded-full'>Login</button>
+                                        className='bg-blue-600 text-white px-6 sm:px-9 py-2 rounded-full'>ورود </button>
                                 </div>
                             )}
 

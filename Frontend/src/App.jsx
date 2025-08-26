@@ -14,7 +14,9 @@ function App() {
   return (
     <>
       {showRecruiterLogin && <RecruiterLogin />}
+      <div className='max-sm:w-[80vw] max-sm:mx-auto' >
       <ToastContainer />
+    </div >
       <AppRoutes />
     </>
 

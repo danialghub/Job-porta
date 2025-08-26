@@ -13,14 +13,14 @@ export const registerCompany = async (req, res) => {
     const imageFile = req.file
 
     if (!name || !email || !password || !imageFile) {
-        return res.json({ success: false, message: "missing Details" })
+        return res.json({ success: false, message: "داده ها از دست رفته" })
     }
 
 
     try {
         const companyExist = await User.findOne({ email })
         if (companyExist) {
-            return res.json({ success: false, message: "Company Already Registered!" })
+            return res.json({ success: false, message: "درحال حاضر این شرکت وجود دارد" })
         }
         const salt = await bcrypt.genSalt(10)
         const hashPasword = await bcrypt.hash(password, salt)
@@ -57,7 +57,7 @@ export const loginCompany = async (req, res) => {
         const company = await Company.findOne({ email })
 
         if (!company.email) {
-            return res.json({ success: false, message: "Company doesn't exist!" })
+            return res.json({ success: false, message: "شرکت نامعتبر است" })
         }
         console.log(await bcrypt.compare(password, company.password));
         const isPassMatch = await bcrypt.compare(password, company.password)
@@ -74,7 +74,7 @@ export const loginCompany = async (req, res) => {
                 token: generateToken(company._id)
             })
         } else {
-            res.json({ success: false, message: "Invalid email or password!" })
+            res.json({ success: false, message: "ایمیل یا پسور اشتباه است" })
         }
     } catch (error) {
         res.json({ success: false, message: error.message })
@@ -149,7 +149,7 @@ export const changeJobApplicationsStatus = async (req, res) => {
     try {
         const { id, status } = req.body
         await JobApplication.findOneAndUpdate({ _id: id }, { status })
-        res.json({ success: true, message: "Status Changed" })
+        res.json({ success: true, message: "وضعیت تغییر کرد" })
     } catch (error) {
         res.json({ success: false, message: error.message })
     }

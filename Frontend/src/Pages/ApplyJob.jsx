@@ -8,6 +8,7 @@ import Loading from '../Components/Loading'
 import kConvert from 'k-convert'
 import { assets } from '../assets/assets'
 import moment from 'moment'
+// import  from 'moment-jalaali'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useAuth } from '@clerk/clerk-react'
@@ -27,10 +28,10 @@ const ApplyJob = () => {
       if (data.success) {
         setJobData(data.job)
       } else {
-        toast.error(data.message)
+        toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
     }
 
   }
@@ -39,11 +40,11 @@ const ApplyJob = () => {
     try {
 
       if (!userData) {
-        return toast.error("Login to apply for jobs")
+        return toast.error("ابتدا وارد شوید برای درخواست دادن", { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
       }
       if (!userData.resume) {
         navigate('/applications')
-        return toast.error("Upload your resume to apply!")
+        return toast.error("رزومه خود را آپلود کنید برای درخواست دادن", { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
       }
       const token = await getToken()
       const { data } = await axios.post(backendUrl + '/api/users/apply', { jobId: jobData._id }, {
@@ -51,13 +52,13 @@ const ApplyJob = () => {
       })
       if (data.success) {
         fetchUserApplications()
-       return toast.success("job Successfully applied")
+        return toast.success(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
 
       } else {
-        toast.error(data.message)
+        toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
       }
     } catch (error) {
-       toast.error(error.message)
+      toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
     }
   }
   const checkAlreadyExist = async () => {
@@ -76,7 +77,7 @@ const ApplyJob = () => {
   }, [id, jobData, userApplications])
 
 
-  return jobData ? (
+  return jobData && userApplications ? (
     <>
       <Navbar />
 
@@ -90,7 +91,7 @@ const ApplyJob = () => {
               alt=""
               className='w-24 h-24 rounded-lg p-4 mr-4 max-md:mb-4 bg-white flex items-center justify-center'
             />
-            <div className='text-center md:text-left text-neutral-700'>
+            <div className='text-center md:text-right text-neutral-700'>
               <h3 className='text-2xl sm:text-4xl mb-2 font-medium'>{jobData.title}</h3>
               <div className='flex flex-wrap max-md:justify-center gap-y-2 text-gray-600 gap-6 lg:gap-10 text-sm h-4'>
                 <span className="flex gap-1 items-center">
@@ -107,7 +108,7 @@ const ApplyJob = () => {
                 </span>
                 <span className="flex gap-1 items-center">
                   <img src={assets.money_icon} alt="" />
-                  CTC: {kConvert.convertTo(jobData.salary)}
+                  حقوق: {kConvert.convertTo(jobData.salary)}
                 </span>
 
               </div>
@@ -117,28 +118,28 @@ const ApplyJob = () => {
             <button
               onClick={applyHandler}
               className={`${isAlreadyApplied ? "bg-gray-500" : "bg-blue-600"} px-10 py-2.5 mt-10 max-md:mx-auto max-md:text-center  rounded text-white `}>
-              {isAlreadyApplied ? "Already Applied" : "Apply now"}
+              {isAlreadyApplied ? "درخواست داده شده" : "درخواست کار"}
             </button>
-            <p className='font-light text-gray-600'>Posted {moment(jobData.date).fromNow()}</p>
+            <p className='font-light text-gray-600'>پست شده {moment(jobData.date).fromNow()}</p>
           </div>
         </div>
 
         <div className='flex flex-col lg:flex-row justify-between items-start'>
           {/*description section */}
           <div className='w-full lg:w-2/4 '>
-            <h2 className='font-bold mb-4 text-2xl'>Job Description</h2>
+            <h2 className='font-bold mb-4 text-2xl'>توضیحات کار</h2>
             <div className='rich-text' dangerouslySetInnerHTML={{ __html: jobData.description }}></div>
             <button
               onClick={applyHandler}
               className={`${isAlreadyApplied ? "bg-gray-500" : "bg-blue-600"} px-10 py-2.5 mt-10 max-md:mx-auto max-md:text-center  rounded text-white `}>
-              {isAlreadyApplied ? "Already Applied" : "Apply now"}
+              {isAlreadyApplied ? "درخواست داده شده" : "درخواست کار"}
             </button>
           </div>
           <div className='w-full lg:w-1/3 mt-8 lg:mt-0 lg:ml-8 space-y-5 '>
-            <h2>More Jobs from {jobData.companyId.name}</h2>
+            <h2>کارهای دیگر شرکت {jobData.companyId.name}</h2>
             {jobs.filter(job => job._id !== jobData._id && job.companyId._id == jobData.companyId._id).filter(job => {
               //set of applied jobs the user has not already applied for this jobs
-              const appliedJobsIds = new Set(userApplications.map(item => item.jobId && item.jobId._id))
+              const appliedJobsIds = new Set( userApplications.map(item => item.jobId && item.jobId._id))
               //return true if 
               return !appliedJobsIds.has(job._id)
             }

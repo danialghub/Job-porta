@@ -52,11 +52,11 @@ const JobListing = () => {
                 {isSearched && (searchFilter.job || searchFilter.location) &&
                     (
                         <>
-                            <h3 className='font-medium text-lg mb-4'>Current search</h3>
+                            <h3 className='font-medium text-lg mb-4'>جستجوی فعلی</h3>
                             <div className='mb-4 text-gray-600'>
                                 {searchFilter.job && (
                                     <span className='inline-flex items-center gap-2.5 bg-blue-50 border border-blue-200 px-2 py-1.5 rounded  '>
-                                        {searchFilter.job.length > 5 ? searchFilter.job.slice(0, 5).concat('...') : searchFilter.job}
+                                        {searchFilter.job.length > 10 ? searchFilter.job.slice(0, 10).concat('...') : searchFilter.job}
                                         <img
                                             onClick={() =>
                                                 setSearchFilter(prev => ({ ...prev, job: "" }))}
@@ -66,8 +66,8 @@ const JobListing = () => {
 
                                 )}
                                 {searchFilter.location && (
-                                    <span className='ml-2 inline-flex items-center gap-2.5 bg-red-50 border border-red-200 px-2 py-1.5 rounded  '>
-                                        {searchFilter.location.length > 5 ? searchFilter.location.slice(0, 5).concat('...') : searchFilter.location}
+                                    <span className='mr-1 inline-flex items-center gap-2.5 bg-red-50 border border-red-200 px-2 py-1.5 rounded  '>
+                                        {searchFilter.location.length > 10 ? searchFilter.location.slice(0, 10).concat('...') : searchFilter.location}
                                         <img
                                             onClick={() =>
                                                 setSearchFilter(prev => ({ ...prev, location: "" }))}
@@ -88,7 +88,7 @@ const JobListing = () => {
                 {/* Category filters */}
                 <div className='max-lg:flex  justify-between items-center'>
                     <div className={isShowedFilter ? "" : "max-lg:hidden"}>
-                        <h4 className='font-medium text-lg py-4'>Search By Categories</h4>
+                        <h4 className='font-medium text-lg py-4'>جستجو بر اساس کار </h4>
                         <ul className='space-y-4 text-gray-600'>
                             {JobCategories.map((job, idx) => (
                                 <li className='flex gap-3 items-center' key={idx}>
@@ -109,7 +109,7 @@ const JobListing = () => {
 
                     {/* Location filters */}
                     <div className={isShowedFilter ? "" : "max-lg:hidden mt-4"}>
-                        <h4 className='font-medium text-lg py-4'>Search By Location</h4>
+                        <h4 className='font-medium text-lg py-4'>جستجو بر اساس مکان</h4>
                         <ul className='space-y-4 text-gray-600'>
                             {JobLocations.map((location, idx) => (
                                 <li className='flex gap-3 items-center' key={idx}>
@@ -138,8 +138,8 @@ const JobListing = () => {
                 :
 
                 <section className=' w-full lg-w-3/4 text-gray-800 max-lg:px-4' id='job_list'>
-                    <h3 className='font-medium text-3xl py-2'>Latest Jobs</h3>
-                    <p className='mb-8'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci sequi ea voluptatibus inventore, enim error.</p>
+                    <h3 className='font-medium text-3xl py-2'>موقعیت  شغلی های اخیر</h3>
+                    <p className='mb-8'>کاری که مورد علاقه ات است را به بهترین شرکت درخواست بده</p>
 
 
 
@@ -152,7 +152,24 @@ const JobListing = () => {
                     </div>
                     {/* Pagination */}
                     {filteredJobs.length > 0 && (
-                        <div className='flex justify-center items-center space-x-2 mt-10  '>
+                        <div className='flex justify-center items-center gap-1 mt-10  '>
+                            <a
+                                onClick={e => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredJobs.length / 6)))}
+                                href="#job_list"
+                                className={`w-10 h-10  flex justify-center items-center rounded ${currentPage - 1 == Math.ceil(filteredJobs.length / 6) - 1 ? 'bg-gray-400 pointer-events-none' : 'bg-gray-700 '}`}
+                            >
+                                <RiArrowRightSLine className='font-bolder text-2xl text-white' />
+                            </a>
+
+                            {Array.from({ length: Math.ceil(filteredJobs.length / 6) }).map((_, idx) => (
+                                <a key={idx} href="#job_list" onClick={e => setCurrentPage(idx + 1)}>
+                                    <button
+                                        className={`w-10 h-10 flex items-center justify-center border border-gray-300 rounded text-white  ${currentPage == idx + 1 ? "bg-blue-500" : "bg-gray-600"}`}
+                                    >{idx + 1}</button>
+                                </a>
+                            ))
+
+                            }
                             <a onClick={e => setCurrentPage(prev => Math.max(prev - 1, 1))}
                                 href="#job_list"
                                 className={`w-10 h-10  flex justify-center items-center rounded ${currentPage - 1 == 0 ? 'bg-gray-400 pointer-events-none' : 'bg-gray-700 '}`}
@@ -161,22 +178,7 @@ const JobListing = () => {
 
 
                             </a>
-                            {Array.from({ length: Math.ceil(filteredJobs.length / 6) }).map((_, idx) => (
-                                <a key={idx} href="#job_list" onClick={e => setCurrentPage(idx + 1)}>
-                                    <button
-                                        className={`w-10 h-10 flex items-center justify-center border border-gray-300 rounded text-white ${currentPage == idx + 1 ? "bg-blue-500" : "bg-gray-600"}`}
-                                    >{idx + 1}</button>
-                                </a>
-                            ))
 
-                            }
-                            <a
-                                onClick={e => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredJobs.length / 6)))}
-                                href="#job_list"
-                                className={`w-10 h-10  flex justify-center items-center rounded ${currentPage - 1 == Math.ceil(filteredJobs.length / 6) - 1 ? 'bg-gray-400 pointer-events-none' : 'bg-gray-700 '}`}
-                            >
-                                <RiArrowRightSLine className='font-bolder text-2xl text-white' />
-                            </a>
                         </div>
                     )
                     }
