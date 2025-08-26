@@ -53,10 +53,10 @@ const ManageJobs = () => {
       <>
 
         <div className='container p-4 max-w-5xl'>
-          <div className='overflow-x-auto'>
+          <div className=''>
             <table className='min-w-full bg-white border border-gray-200 max-sm:text-sm'>
               <thead>
-                <tr>
+                <tr className='border-b'>
                   <th className='px-4 py-2 border-b text-right max-sm:hidden'>#</th>
                   <th className='px-4 py-2 border-b text-right'>عنوان کار</th>
                   <th className='px-4 py-2 border-b text-right max-sm:hidden'>تاریخ</th>

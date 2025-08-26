@@ -98,7 +98,7 @@ const ViewApplications = () => {
                     {data.status === "در حال انتظار"
                       ? (<div className='relative inline-block ml-10   group'>
                         <button className='text-gray-500 action-button '>...</button>
-                        <div className='z-10 hidden absolute top-0 right-0 md:left-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow group-hover:block'>
+                        <div className='z-10 hidden absolute top-5 -right-10 md:left-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow group-hover:block'>
                           <button
                             onClick={() => changeJobApplicationStatus(data._id, " قبول شده")}
                             className='block w-full text-right px-4 py-2 text-blue-500 hover:bg-gray-100'>قبول شده</button>
@@ -107,7 +107,7 @@ const ViewApplications = () => {
                             className='block w-full text-right px-4 py-2 text-red-500 hover:bg-gray-100'>رد شده</button>
                         </div>
                       </div>)
-                      : <div className='text-right mr-10'>{data.status}</div>
+                      : <div className='text-right '>{data.status}</div>
 
                     }
 

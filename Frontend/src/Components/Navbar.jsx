@@ -11,8 +11,8 @@ const Navbar = () => {
     const { setShowRecruiterLogin, companyData, companyToken, logoutHandler } = useContext(AppContext)
 
     return (
-        <div className='shadow py-4'>
-            <div className='container px-4 2xl:px-20 flex justify-between items-center mx-auto '>
+        <div className='shadow py-4   '>
+            <div className='container min-w-max px-4 2xl:px-20 flex justify-between items-center mx-auto '>
                 <img
                     className='max-sm:w-32 cursor-pointer'
                     src={assets.logo} onClick={() => { navigate('/'); scrollTo(0, 500) }} alt="" />

@@ -17,7 +17,7 @@ const Dashboard = () => {
         }
     }, [companyData])
     return (
-        <div className='min-h-screen'>
+        <div className='min-h-screen '>
             {/* navbar for recruiter Login */}
             <div className='shadow py-4'>
                 <div className='px-5 flex items-center justify-between'>
@@ -70,7 +70,7 @@ const Dashboard = () => {
                     {/* main content mounts from other pages */}
                 </div>
 
-                <div className='flex-1'>
+                <div className='flex-1 '>
 
                     <Outlet />
                 </div>

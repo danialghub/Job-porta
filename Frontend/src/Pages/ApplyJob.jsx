@@ -136,14 +136,14 @@ const ApplyJob = () => {
             </button>
           </div>
           <div className='w-full lg:w-1/3 mt-8 lg:mt-0 lg:ml-8 space-y-5 '>
-            <h2>کارهای دیگر شرکت {jobData.companyId.name}</h2>
+
+            {jobs.filter(job => job._id !== jobData._id && job.companyId._id == jobData.companyId._id).length > 0 && <h2>کارهای دیگر شرکت {jobData.companyId.name}</h2>}
             {jobs.filter(job => job._id !== jobData._id && job.companyId._id == jobData.companyId._id).filter(job => {
               if (userApplications.length) {
                 return new Set(userApplications.map(item => item.jobId && item.jobId._id)).has(job._id)
               } else {
                 return true
               }
-
             }
             ).slice(0, 4).map(job => (
               <JobCard key={job._id} {...job} />

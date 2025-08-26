@@ -83,7 +83,7 @@ const JobListing = () => {
 
                 }
                 <button onClick={e => setIsShowedFilter(prev => !prev)} className='lg:hidden my-4  px-6 py-1.5 rounded border border-gray-500'>
-                    {isShowedFilter ? "Click" : "Filters"}
+                    {isShowedFilter ? "بستن" : "فیلترها"}
                 </button>
                 {/* Category filters */}
                 <div className='max-lg:flex  justify-between items-center'>
