@@ -77,7 +77,7 @@ const ApplyJob = () => {
   }, [id, jobData, userApplications])
 
 
-  return jobData  ? (
+  return jobData ? (
     <>
       <Navbar />
 
@@ -138,13 +138,12 @@ const ApplyJob = () => {
           <div className='w-full lg:w-1/3 mt-8 lg:mt-0 lg:ml-8 space-y-5 '>
             <h2>کارهای دیگر شرکت {jobData.companyId.name}</h2>
             {jobs.filter(job => job._id !== jobData._id && job.companyId._id == jobData.companyId._id).filter(job => {
-              //set of applied jobs the user has not already applied for this jobs
-              const appliedJobsIds = new Set( userApplications.map(item => item.jobId && item.jobId._id))
-              //return true if 
-              return !appliedJobsIds.has(job._id)
+              userApplications ?
+              new Set(userApplications.map(item => item.jobId && item.jobId._id)).has(job._id)
+              :  true
             }
             ).slice(0, 4).map(job => (
-              <JobCard key={job._id} {...job} />
+            <JobCard key={job._id} {...job} />
             ))
 
             }
