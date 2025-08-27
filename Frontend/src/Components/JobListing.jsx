@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import { JobCategories, JobLocations, assets } from '../assets/assets'
 import JobCard from './JobCard'
-import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
+import Pagination from './Pagination'
 import Loarder from './Loading'
 const JobListing = () => {
 
@@ -82,12 +82,14 @@ const JobListing = () => {
 
 
                 }
-                <button onClick={e => setIsShowedFilter(prev => !prev)} className='lg:hidden my-4  px-6 py-1.5 rounded border border-gray-500'>
+                <button
+                    onClick={e => setIsShowedFilter(prev => !prev)}
+                    className='lg:hidden my-2  px-6 py-1.5 rounded border border-gray-500'>
                     {isShowedFilter ? "بستن" : "فیلترها"}
                 </button>
                 {/* Category filters */}
                 <div className='max-lg:flex  justify-between items-center'>
-                    <div className={isShowedFilter ? "" : "max-lg:hidden"}>
+                    <div className={isShowedFilter ? "" : "max-lg:hidden mt-2 sm:mt-4"}>
                         <h4 className='font-medium text-lg py-4'>جستجو بر اساس کار </h4>
                         <ul className='space-y-4 text-gray-600'>
                             {JobCategories.map((job, idx) => (
@@ -108,7 +110,7 @@ const JobListing = () => {
                     </div>
 
                     {/* Location filters */}
-                    <div className={isShowedFilter ? "" : "max-lg:hidden mt-4"}>
+                    <div className={isShowedFilter ? "" : "max-lg:hidden mt-2 sm:mt-4"}>
                         <h4 className='font-medium text-lg py-4'>جستجو بر اساس مکان</h4>
                         <ul className='space-y-4 text-gray-600'>
                             {JobLocations.map((location, idx) => (
@@ -142,44 +144,14 @@ const JobListing = () => {
                     <p className='mb-8'>کاری که مورد علاقه ات است را به بهترین شرکت درخواست بده</p>
 
 
-
                     <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
                         {filteredJobs.slice((currentPage - 1) * 6, (currentPage) * 6).map(data => (
                             <JobCard key={data._id} {...data} />
-                        ))
-
-                        }
+                        ))}
                     </div>
                     {/* Pagination */}
                     {filteredJobs.length > 0 && (
-                        <div className='flex justify-center items-center gap-1 mt-10  '>
-                            <a
-                                onClick={e => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredJobs.length / 6)))}
-                                href="#job_list"
-                                className={`w-10 h-10  flex justify-center items-center rounded ${currentPage - 1 == Math.ceil(filteredJobs.length / 6) - 1 ? 'bg-gray-400 pointer-events-none' : 'bg-gray-700 '}`}
-                            >
-                                <RiArrowRightSLine className='font-bolder text-2xl text-white' />
-                            </a>
-
-                            {Array.from({ length: Math.ceil(filteredJobs.length / 6) }).map((_, idx) => (
-                                <a key={idx} href="#job_list" onClick={e => setCurrentPage(idx + 1)}>
-                                    <button
-                                        className={`w-10 h-10 flex items-center justify-center border border-gray-300 rounded text-white  ${currentPage == idx + 1 ? "bg-blue-500" : "bg-gray-600"}`}
-                                    >{idx + 1}</button>
-                                </a>
-                            ))
-
-                            }
-                            <a onClick={e => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                                href="#job_list"
-                                className={`w-10 h-10  flex justify-center items-center rounded ${currentPage - 1 == 0 ? 'bg-gray-400 pointer-events-none' : 'bg-gray-700 '}`}
-                            >
-                                <RiArrowLeftSLine className='font-bolder text-2xl text-white' />
-
-
-                            </a>
-
-                        </div>
+                        <Pagination list={filteredJobs} page={currentPage} setPage={setCurrentPage} perPage={6} />
                     )
                     }
                 </section>

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Outlet, useNavigate, NavLink } from 'react-router-dom'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
-import { toast } from 'react-toastify'
+import Navbar from '../Components/Navbar'
 const Dashboard = () => {
     const navigate = useNavigate()
     const { companyData, logoutHandler } = useContext(AppContext)
@@ -21,38 +21,7 @@ const Dashboard = () => {
 
         <div className='min-h-screen '>
             {/* navbar for recruiter Login */}
-            <div className='shadow py-4'>
-                <div className='px-5 flex items-center justify-between max-sm:text-sm'>
-                    <img
-                        onClick={() => navigate('/')}
-                        className='max-sm:w-32 cursor-pointer'
-                        src={assets.logo} alt="" />
-                    {companyData && (
-                        <div className='flex items-center gap-3'>
-                            <p >خوش آمدی, {companyData.name}</p>
-                            <p> | </p>
-                            <div className='relative group'>
-                                <img
-                                    className='w-8 border rounded-full'
-                                    src={companyData.image} alt="" />
-                                <div className='hidden absolute group-hover:block top-0 left-0 z-10 text-black rounded pt-12'>
-                                    <ul className='list-none m-0 p-2 bg-white rounded-md border text-sm shadow'>
-                                        <li
-                                            onClick={() => navigate('/')}
-                                            className='py-2 px-4 cursor-pointer '>خانه
-                                        </li>
-                                        <li
-                                            onClick={logoutHandler}
-                                            className='py-2 px-4 cursor-pointer '>خروج
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                </div>
-            </div>
+           <Navbar />
 
             <div className='flex items-start '>
                 {/* left Sidebar  */}

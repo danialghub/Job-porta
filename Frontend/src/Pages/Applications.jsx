@@ -2,19 +2,20 @@ import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import Loader from '../Components/Loading'
-import { assets, jobsApplied } from '../assets/assets'
+import { assets } from '../assets/assets'
 import moment from 'moment'
 import { AppContext } from '../context/AppContext'
 import { useAuth, useUser } from '@clerk/clerk-react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-
+import Pagination from '../Components/Pagination'
 const Applications = () => {
     const { user } = useUser()
     const { getToken } = useAuth()
 
     const [isEdit, setIsEdit] = useState(false)
     const [resume, setResume] = useState(null)
+    const [currentPage, setCurrentPage] = useState(1)
     const { backendUrl, userData, userApplications, fetchUsersData, fetchUserApplications } = useContext(AppContext)
 
 
@@ -50,7 +51,7 @@ const Applications = () => {
         <>
             <Navbar />
 
-            <div className='container px-4 min-h-[65vh] 2xl:px-20 mx-auto my-10'>
+            <div className='container px-4 min-h-[65vh] 2xl:px-20 mx-auto my-10 '>
                 {/* Getting Resume Inputs */}
                 <h2 className='text-xl font-semibold '>رزومه شما</h2>
                 <div className='flex gap-2 mb-6 mt-3'>
@@ -96,48 +97,54 @@ const Applications = () => {
                 <>
                     {userApplications.length ?
 
-
-                        <table className='min-w-full bg-white border rounded-lg '>
-                            <thead>
-                                <tr>
-                                    <th className='px-4 py-3  border-b text-right '>شرکت</th>
-                                    <th className='px-4 py-3  border-b text-right '>عنوان کار</th>
-                                    <th className='px-4 py-3 border-b text-right max-sm:hidden '>مکان</th>
-                                    <th className='px-4 py-3 border-b text-right max-sm:hidden'>تاریخ</th>
-                                    <th className='px-4 py-3  border-b text-right '>وضعیت</th>
-                                </tr>
-                            </thead>
-                            <tbody className='max-sm:text-sm'>
-                                {userApplications.map((job, idx) => (true ? (
-                                    <tr key={idx}>
-                                        <td className='px-4 py-3 flex items-center gap-2 border-b'>
-                                            <img
-                                                className='w-8 h-8'
-                                                src={job.companyId.image} alt="" />
-                                            {job.companyId.name}
-                                        </td>
-                                        <td className='px-4 py-3 border-b'>{job.jobId.title}</td>
-                                        <td className='px-4 py-3 border-b max-sm:hidden'>{job.jobId.location}</td>
-                                        <td className='px-4 py-3 border-b max-sm:hidden'>{moment(job.date).format('ll')}</td>
-                                        <td className='px-4 py-3 border-b '>
-                                            <div className={`${job.status == "قبول شده" ? 'bg-green-100' : job.status == 'رد شده' ? 'bg-red-100' : 'bg-blue-100'} px-3 text-center py-1.5 rounded `}>
-                                                {job.status}
-                                            </div>
-                                        </td>
+                        <div>
+                            <table className='min-w-full bg-white border rounded-lg '>
+                                <thead>
+                                    <tr>
+                                        <th className='px-4 py-3  border-b text-right '>شرکت</th>
+                                        <th className='px-4 py-3  border-b text-right '>عنوان کار</th>
+                                        <th className='px-4 py-3 border-b text-right max-sm:hidden '>مکان</th>
+                                        <th className='px-4 py-3 border-b text-right max-sm:hidden'>تاریخ</th>
+                                        <th className='px-4 py-3  border-b text-right '>وضعیت</th>
                                     </tr>
-                                ) : (null)
+                                </thead>
+                                <tbody className='max-sm:text-sm'>
+                                    {userApplications.reverse().slice((currentPage - 1) * 5, (currentPage) * 5).map((job, idx) => ( (
+                                        <tr key={idx}>
+                                            <td className='px-4 py-2 flex items-center gap-2 border-b'>
+                                                <img
+                                                    className='w-8 h-8'
+                                                    src={job.companyId.image} alt="" />
+                                                {job.companyId.name}
+                                            </td>
+                                            <td className='px-4 py-2 border-b'>{job.jobId.title}</td>
+                                            <td className='px-4 py-2 border-b max-sm:hidden'>{job.jobId.location}</td>
+                                            <td className='px-4 py-2 border-b max-sm:hidden'>{moment(job.date).format('ll')}</td>
+                                            <td className='px-4 py-2 border-b '>
+                                                <div className={`${job.status == "قبول شده" ? 'bg-green-100' : job.status == 'رد شده' ? 'bg-red-100' : 'bg-blue-100'} px-3 text-center py-1.5 rounded `}>
+                                                    {job.status}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ) 
 
-                                ))
-                                }
-                            </tbody>
-                        </table>
+                                    ))
+                                    }
+                                </tbody>
+                            </table>
+                            <div className='absolute bottom-16 right-1/2 translate-x-1/2'>
+                                <Pagination list={userApplications} page={currentPage} setPage={setCurrentPage} perPage={5} />
+                            </div>
+                        </div>
                         : <div className='min-w-full text-3xl h-[50vh] flex justify-center items-center'>هیچ درخواستی یافت نشد</div>
                     }
 
                 </>
 
             </div>
-            <Footer />
+           
+                <Footer />
+          
 
         </>
     ) : <Loader />

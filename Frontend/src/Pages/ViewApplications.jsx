@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { viewApplicationsPageData, assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
 import Loader from '../Components/Loading'
+import Pagination from '../Components/Pagination'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 const ViewApplications = () => {
 
   const { backendUrl, companyToken } = useContext(AppContext)
   const [applicants, setApplicants] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
 
   const fetchCompanyJobApplications = async () => {
     try {
@@ -21,10 +23,10 @@ const ViewApplications = () => {
         setApplicants(data.applications.reverse())
 
       } else {
-        toast.error(data.message, {  })
+        toast.error(data.message, {})
       }
     } catch (error) {
-      toast.error(error.message, {  })
+      toast.error(error.message, {})
 
     }
   }
@@ -63,9 +65,9 @@ const ViewApplications = () => {
     )
     : (
 
-      <div className='container sm:max-w-4xl   p-4 flex-1 overflow-hidden '>
+      <div className='container relative sm:max-w-4xl min-h-[50vh] sm:min-h-[70vh]  p-4 flex-1 overflow-hidden '>
         <div className='overflow-auto '>
-          <table className='max-sm:min-w-max min-w-full bg-white border border-gray-200 max-sm:text-sm'>
+          <table className='max-sm:min-w-max sm:min-w-full bg-white border border-gray-200 max-sm:text-sm'>
             <thead>
               <tr className='border-b'>
                 <th className='px-4 py-2 text-right'>#</th>
@@ -73,11 +75,11 @@ const ViewApplications = () => {
                 <th className='px-4 py-2 text-right '>عنوان شغل</th>
                 <th className='px-4 py-2 text-right '>مکان</th>
                 <th className='px-4 py-2 text-right'>رزومه</th>
-                <th className='px-4 py-2 text-center'>وضعیت</th>
+                <th className='px-4 py-2 text-right'>وضعیت</th>
               </tr>
             </thead>
             <tbody>
-              {applicants.filter(item => item.jobId && item.userId).map((data, idx) => (
+              {applicants.slice((currentPage - 1) * 7, (currentPage) * 7).filter(item => item.jobId && item.userId).map((data, idx) => (
                 <tr className='text-gray-700' key={idx}>
                   <td className='px-4 py-2 text-right border-b'>{idx + 1}</td>
                   <td className='px-4 py-2 text-right border-b flex items-center'>
@@ -121,6 +123,10 @@ const ViewApplications = () => {
             </tbody>
           </table>
         </div>
+        <div className='absolute bottom-0 right-1/2 translate-x-1/2'>
+          <Pagination list={applicants} page={currentPage} setPage={setCurrentPage} perPage={7} />
+        </div>
+
       </div>
     ) : <Loader />
 }

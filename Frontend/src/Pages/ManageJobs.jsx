@@ -6,11 +6,13 @@ import moment from 'moment'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Loader from '../Components/Loading'
+import Pagination from '../Components/Pagination'
 
 const ManageJobs = () => {
   const navigate = useNavigate()
   const [jobs, setJobs] = useState(false)
   const { backendUrl, companyToken, getJobs } = useContext(AppContext)
+  const [currentPage, setCurrentPage] = useState(1)
 
   const fetchJobs = async () => {
     try {
@@ -52,7 +54,7 @@ const ManageJobs = () => {
     </div>) : (
       <>
 
-        <div className='container p-4 mt-2 sm:max-w-4xl overflow-hidden  flex-1'>
+        <div className='container p-4 mt-2 sm:max-w-4xl overflow-hidden min-h-[55vh] sm:min-h-[65vh] relative  flex-1'>
           <div className='overflow-x-auto'>
             <table className='min-w-max sm:min-w-full bg-white border border-gray-200 '>
               <thead>
@@ -66,7 +68,7 @@ const ManageJobs = () => {
                 </tr>
               </thead>
               <tbody>
-                {jobs.map((item, idx) => (
+                {jobs.slice((currentPage - 1) * 7, (currentPage) * 7).map((item, idx) => (
                   <tr key={idx} className='text-gray-700'>
                     <td className='px-4 py-3 border-b '>{idx + 1}</td>
                     <td className='px-4 py-3 border-b  '>{item.title}</td>
@@ -88,7 +90,9 @@ const ManageJobs = () => {
           <button
             onClick={() => navigate('/dashboard/add-job')}
             className='bg-black/70 text-white py-2 px-8 rounded mt-6'>ایجاد کار</button>
-
+          <div className='absolute bottom-0 right-1/2 translate-x-1/2'>
+            <Pagination list={jobs} page={currentPage} setPage={setCurrentPage} perPage={7} />
+          </div>
         </div>
 
 

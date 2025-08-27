@@ -35,7 +35,7 @@ const Navbar = () => {
                                         className='w-8 border rounded-full'
                                         src={companyData.image} alt="" />
 
-                                    <div className='hidden absolute group-hover:block top-0 -left-5 z-10 text-black rounded pt-12 '>
+                                    <div className='hidden absolute group-hover:block top-0 left-5 sm:left-0 z-10 text-black rounded pt-12 '>
                                         <ul className='list-none m-0 p-2 bg-white rounded-md border text-sm shadow '>
                                             <li className='py-2 px-4 cursor-pointer pr-10'>
                                                 <Link to="/dashboard">داشبورد</Link>
