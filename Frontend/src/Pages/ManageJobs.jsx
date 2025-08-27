@@ -54,7 +54,7 @@ const ManageJobs = () => {
     </div>) : (
       <>
 
-        <div className='container p-4 mt-2 sm:max-w-4xl overflow-hidden min-h-[60vh] sm:min-h-[65vh] relative  flex-1'>
+        <div className='container p-4 mt-2 sm:max-w-4xl overflow-hidden min-h-[65vh] relative  flex-1'>
           <div className='overflow-x-auto'>
             <table className='min-w-max sm:min-w-full bg-white border border-gray-200 '>
               <thead>
