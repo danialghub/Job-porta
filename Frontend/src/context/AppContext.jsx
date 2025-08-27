@@ -29,10 +29,10 @@ const AppContextProvider = ({ children }) => {
             if (data.success) {
                 setJobs(data.jobs)
             } else {
-                toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
+                toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
+            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
 
         }
     }
@@ -43,11 +43,11 @@ const AppContextProvider = ({ children }) => {
                 setCompanyData(data.company)
 
             } else {
-                toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+                toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
             }
 
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
         }
     }
     const fetchUsersData = async () => {
@@ -62,10 +62,10 @@ const AppContextProvider = ({ children }) => {
                 setUserData(data.user)
 
             } else {
-                toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
+                toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
+            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
 
         }
     }
@@ -85,7 +85,7 @@ const AppContextProvider = ({ children }) => {
                 setUserApplications([])
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
+            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
 
         }
     }
@@ -95,7 +95,7 @@ const AppContextProvider = ({ children }) => {
         setCompanyToken(null)
         localStorage.removeItem('companyToken')
         navigate('/')
-        toast.success("با موفقیت خارج شدید", { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
+        toast.success("با موفقیت خارج شدید", { className: "max-sm:w-[70vw] max-sm:mt-3 max-sm:mx-auto" })
     }
 
     useEffect(() => {

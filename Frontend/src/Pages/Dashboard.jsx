@@ -12,7 +12,8 @@ const Dashboard = () => {
         { title: 'مشاهده درخواست ها', route: '/dashboard/view-applications', icon: assets.person_tick_icon },
     ]
     useEffect(() => {
-        if (companyData) {
+
+        if (companyData && location.pathname === "/dashboard") {
             navigate('/dashboard/manage-jobs')
         }
     }, [companyData])
@@ -20,7 +21,7 @@ const Dashboard = () => {
         <div className='min-h-screen '>
             {/* navbar for recruiter Login */}
             <div className='shadow py-4'>
-                <div className='px-5 flex items-center justify-between'>
+                <div className='px-5 flex items-center justify-between max-sm:text-sm'>
                     <img
                         onClick={() => navigate('/')}
                         className='max-sm:w-32 cursor-pointer'
@@ -28,6 +29,7 @@ const Dashboard = () => {
                     {companyData && (
                         <div className='flex items-center gap-3'>
                             <p >خوش آمدی, {companyData.name}</p>
+                            <p> | </p>
                             <div className='relative group'>
                                 <img
                                     className='w-8 border rounded-full'

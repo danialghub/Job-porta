@@ -20,10 +20,10 @@ const ManageJobs = () => {
         setJobs(data.jobsData.reverse())
 
       } else {
-        toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+        toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
       }
     } catch (error) {
-      toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+      toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
     }
 
   }
@@ -31,14 +31,14 @@ const ManageJobs = () => {
     try {
       const { data } = await axios.post(backendUrl + '/api/company/change-visiblity', { id }, { headers: { token: companyToken } })
       if (data.success) {
-        toast.success(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+        toast.success(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
         fetchJobs()
         getJobs()
       } else {
-        toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+        toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
       }
     } catch (error) {
-      toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+      toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
     }
   }
   useEffect(() => {
@@ -61,8 +61,8 @@ const ManageJobs = () => {
                   <th className='px-4 py-2 border-b text-right'>عنوان کار</th>
                   <th className='px-4 py-2 border-b text-right max-sm:hidden'>تاریخ</th>
                   <th className='px-4 py-2 border-b text-right max-sm:hidden'>مکان</th>
-                  <th className='px-4 py-2 border-b text-center'>تعداد درخواستی ها</th>
-                  <th className='px-4 py-2 border-b text-right'>وضعیت نمایش</th>
+                  <th className='px-4 py-2 border-b text-center max-sm:w-36'>درخواستی ها</th>
+                  <th className='px-4 py-2 border-b text-right '>وضعیت نمایش</th>
                 </tr>
               </thead>
               <tbody>

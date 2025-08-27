@@ -37,16 +37,16 @@ const AddJob = () => {
                 location,
             }, { headers: { token: companyToken } })
             if (data.success) {
-                toast.success("a new Job Successufully Added", { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+                toast.success("a new Job Successufully Added", { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
                 setTitle("")
                 setSalary(0)
                 quillRef.current.root.innerHTML = ""
                 getJobs()
             } else {
-                toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+                toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
 
         }
     }

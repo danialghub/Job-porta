@@ -86,6 +86,9 @@
 .rich-text li {
     margin-bottom: 8px
 }
+.rich-text{
+    overflow-wrap:break-word;
+}
 
 .ql-editor {
     direction: rtl;

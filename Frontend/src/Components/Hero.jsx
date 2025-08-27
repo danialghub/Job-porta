@@ -26,13 +26,13 @@ const Hero = () => {
                     <h2 className='text-2xl md:text-3xl lg:text-4xl font-medium mb-4'>بیش از 10 هزار نفر پذیرش</h2>
                     <p className='text-sm max-w-xl mx-auto font-light px-5'>قدم بزرگ بعدی زندگی کاریت در اینجا آغاز میشود - بهترین موقیعت شغلی را پیدا کند و آیندتو بساز</p>
                 </div>
-                <div className='flex justify-between items-center max-w-xl  p-2 rounded bg-white mx-4 sm:mx-auto pl-4 text-gray-600 '>
+                <div className='flex justify-between items-center max-w-xl  p-2 rounded bg-white mx-4 sm:mx-auto pl-4 text-gray-600 max-sm:text-sm max-sm:pl-2'>
                     <div className='flex items-center gap-1 '>
                         <img className='h-4 sm:h-5 pointer-events-none' src={assets.search_icon} alt="Job" />
                         <input
                             type="text"
                             placeholder='فیلتر بر اساس شغل'
-                            className='outline-none rounded w-full max-sm:w-3/4'
+                            className='outline-none rounded w-full max-sm:w-3/4 '
                             ref={jobRef}
                         />
                     </div>

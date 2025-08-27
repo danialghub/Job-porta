@@ -29,13 +29,13 @@ const Applications = () => {
             })
 
             if (data.succuss) {
-                toast.success(data.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
+                toast.success(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
                 await fetchUsersData()
             } else {
-                toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
+                toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-2 max-sm:mx-auto" })
+            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
         }
         setResume(null)
         setIsEdit(false)
@@ -97,7 +97,7 @@ const Applications = () => {
                     {userApplications.length ?
 
 
-                        <table className='min-w-full  bg-white border rounded-lg '>
+                        <table className='min-w-full bg-white border rounded-lg '>
                             <thead>
                                 <tr>
                                     <th className='px-4 py-3  border-b text-right '>شرکت</th>
@@ -120,7 +120,7 @@ const Applications = () => {
                                         <td className='px-4 py-3 border-b max-sm:hidden'>{job.jobId.location}</td>
                                         <td className='px-4 py-3 border-b max-sm:hidden'>{moment(job.date).format('ll')}</td>
                                         <td className='px-4 py-3 border-b '>
-                                            <div className={`${job.status == "قبول شده" ? 'bg-green-100' : job.status == 'رد شده' ? 'bg-red-100' : 'bg-blue-100'} px-4 text-center py-1.5 rounded `}>
+                                            <div className={`${job.status == "قبول شده" ? 'bg-green-100' : job.status == 'رد شده' ? 'bg-red-100' : 'bg-blue-100'} px-3 text-center py-1.5 rounded `}>
                                                 {job.status}
                                             </div>
                                         </td>

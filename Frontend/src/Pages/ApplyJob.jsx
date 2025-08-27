@@ -28,10 +28,10 @@ const ApplyJob = () => {
       if (data.success) {
         setJobData(data.job)
       } else {
-        toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+        toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
       }
     } catch (error) {
-      toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+      toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
     }
 
   }
@@ -40,11 +40,11 @@ const ApplyJob = () => {
     try {
 
       if (!userData) {
-        return toast.error("ابتدا وارد شوید برای درخواست دادن", { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+        return toast.error("ابتدا وارد شوید برای درخواست دادن", { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
       }
       if (!userData.resume) {
         navigate('/applications')
-        return toast.error("رزومه خود را آپلود کنید برای درخواست دادن", { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+        return toast.error("رزومه خود را آپلود کنید برای درخواست دادن", { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
       }
       const token = await getToken()
       const { data } = await axios.post(backendUrl + '/api/users/apply', { jobId: jobData._id }, {
@@ -52,13 +52,13 @@ const ApplyJob = () => {
       })
       if (data.success) {
         fetchUserApplications()
-        return toast.success(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+        return toast.success(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
 
       } else {
-        toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+        toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
       }
     } catch (error) {
-      toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+      toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
     }
   }
   const checkAlreadyExist = async () => {
@@ -137,10 +137,10 @@ const ApplyJob = () => {
           </div>
           <div className='w-full lg:w-1/3 mt-8 lg:mt-0 lg:ml-8 space-y-5 '>
 
-            {jobs.filter(job => job._id !== jobData._id && job.companyId._id == jobData.companyId._id).length > 0 && <h2>کارهای دیگر شرکت {jobData.companyId.name}</h2>}
+            <h2>کارهای دیگر شرکت {jobData.companyId.name}</h2>
             {jobs.filter(job => job._id !== jobData._id && job.companyId._id == jobData.companyId._id).filter(job => {
               if (userApplications.length) {
-                return new Set(userApplications.map(item => item.jobId && item.jobId._id)).has(job._id)
+                return !(new Set(userApplications.map(item => item.jobId && item.jobId._id)).has(job._id))
               } else {
                 return true
               }

@@ -21,10 +21,10 @@ const ViewApplications = () => {
         setApplicants(data.applications.reverse())
 
       } else {
-        toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+        toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
       }
     } catch (error) {
-      toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+      toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
 
     }
   }
@@ -38,12 +38,12 @@ const ViewApplications = () => {
       )
       if (data.success) {
         fetchCompanyJobApplications()
-        toast.success(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+        toast.success(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
       } else {
-        toast.error(data.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+        toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
       }
     } catch (error) {
-      toast.error(error.message, { className: "max-sm:w-[90vw] max-sm:mt-5 max-sm:mx-auto" })
+      toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
 
     }
   }
@@ -51,7 +51,9 @@ const ViewApplications = () => {
     if (companyToken) {
       fetchCompanyJobApplications()
     }
+
   }, [companyToken])
+
 
   return applicants ? applicants.length === 0 ?
     (
@@ -62,8 +64,8 @@ const ViewApplications = () => {
     : (
 
       <div className='container max-w-5xl p-4 '>
-        <div>
-          <table className='w-full max-w-4xl bg-white border border-gray-200 max-sm:text-sm'>
+        <div className=''>
+          <table className='min-w-full max-w-4xl bg-white border border-gray-200 max-sm:text-sm'>
             <thead>
               <tr className='border-b'>
                 <th className='px-4 py-2 text-right'>#</th>
@@ -100,7 +102,7 @@ const ViewApplications = () => {
                         <button className='text-gray-500 action-button '>...</button>
                         <div className='z-10 hidden absolute top-5 -right-10 md:left-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow group-hover:block'>
                           <button
-                            onClick={() => changeJobApplicationStatus(data._id, " قبول شده")}
+                            onClick={() => changeJobApplicationStatus(data._id, "قبول شده")}
                             className='block w-full text-right px-4 py-2 text-blue-500 hover:bg-gray-100'>قبول شده</button>
                           <button
                             onClick={() => changeJobApplicationStatus(data._id, "رد شده")}

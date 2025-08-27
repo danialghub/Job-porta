@@ -36,10 +36,10 @@ const RecruiterLogin = () => {
                     localStorage.setItem('companyToken', data.token)
                     setShowRecruiterLogin(false)
                     navigate('/dashboard')
-                    toast.success("Login Succssesfully", { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+                    toast.success("با موفقیت وارد شدید", { className: "max-sm:w-[70vw] max-sm:mt-3 max-sm:mx-auto" })
 
                 } else {
-                    toast.error("Invalid Email Or Password!", { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+                    toast.error("Invalid Email Or Password!", { className: "max-sm:w-[70vw] max-sm:mt-3 max-sm:mx-auto" })
                 }
             } else {
                 const formData = new FormData()
@@ -55,15 +55,15 @@ const RecruiterLogin = () => {
                     localStorage.setItem('companyToken', data.token)
                     setShowRecruiterLogin(false)
                     navigate('/dashboard')
-                    toast.success("Your Account Succssesfully Registered", { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+                    toast.success("حساب شما با موفقیت ایجاد شد", { className: "max-sm:w-[70vw] max-sm:mt-3 max-sm:mx-auto" })
 
                 } else {
-                    toast.error(data.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+                    toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mt-3 max-sm:mx-auto" })
                 }
             }
 
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[90vw] mt-5 mx-auto" })
+            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mt-3 max-sm:mx-auto" })
         }
     }
 
@@ -97,10 +97,10 @@ const RecruiterLogin = () => {
                 ) : (
                     <>
                         {state !== "ورود" && (
-                            <div  className='border px-4 py-2 flex items-center gap-2 rounded-full mt-5'>
+                            <div className='border px-4 py-2 flex items-center gap-2 rounded-full mt-5'>
                                 <img src={assets.person_icon} alt="" />
                                 <input
-                                    
+
                                     className='outline-none text-sm'
                                     onChange={e => setName(e.target.value)}
                                     value={name}

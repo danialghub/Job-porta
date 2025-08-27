@@ -20,15 +20,13 @@ const Navbar = () => {
                     user
                         ? (
                             <div className='flex items-center gap-3 max-sm:gap-2 max-sm:text-sm'>
-                                <Link to="/applications">شغلی های درخواستی</Link>
+                                <Link to="/applications">کارهای درخواستی</Link>
                                 <p>|</p>
-                                <p>سلام, {user.firstName + " " + user.lastName}</p>
+                                <p className='max-sm:hidden'>سلام, {user.firstName + " " + user.lastName}</p>
                                 <UserButton />
                             </div>
                         ) : companyToken && companyData
                             ? (<div className='flex items-center gap-3 max-sm:text-sm'>
-
-
 
                                 <p >خوش آمدی ,{companyData.name}</p>
                                 <p>|</p>
