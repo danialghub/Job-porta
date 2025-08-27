@@ -37,16 +37,16 @@ const AddJob = () => {
                 location,
             }, { headers: { token: companyToken } })
             if (data.success) {
-                toast.success("a new Job Successufully Added", { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+                toast.success("a new Job Successufully Added")
                 setTitle("")
                 setSalary(0)
                 quillRef.current.root.innerHTML = ""
                 getJobs()
             } else {
-                toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+                toast.error(data.message)
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+            toast.error(error.message)
 
         }
     }
@@ -61,7 +61,7 @@ const AddJob = () => {
                     onChange={e => setTitle(e.target.value)}
                     value={title}
                     type="text"
-                    className='w-full max-w-lg px-3 py-2 border-2 border-gray-300 rounded'
+                    className='w-full max-w-lg px-3 py-1 sm:py-2 border-2 border-gray-300 rounded'
                 />
             </div>
             <div className='w-full max-w-lg'>
@@ -73,7 +73,7 @@ const AddJob = () => {
                 <div className='w-full'>
                     <p className='mb-2 text-gray-600'>دسته بندی کار</p>
                     <select
-                        className='w-full px-3 py-2 border-2 border-gray-300 rounded  outline-none'
+                        className='w-full px-3 py-1 sm:py-2 border-2 border-gray-300 rounded  outline-none'
                         value={category}
                         onChange={e => setCategory(e.target.value)}>
                         {JobCategories.map((item, idx) => (
@@ -86,7 +86,7 @@ const AddJob = () => {
                 <div className='w-full'>
                     <p className='mb-2 text-gray-600'>مکان کار</p>
                     <select
-                        className='w-full px-3 py-2 border-2 border-gray-300 rounded  outline-none'
+                        className='w-full px-3 py-1 sm:py-2 border-2 border-gray-300 rounded  outline-none'
                         value={location}
                         onChange={e => setLocation(e.target.value)}>
                         {JobLocations.map((item, idx) => (
@@ -99,7 +99,7 @@ const AddJob = () => {
                 <div className='w-full'>
                     <p className='mb-2 text-gray-600'>سطح کار</p>
                     <select
-                        className='w-full  px-3 py-2 border-2 border-gray-300 rounded outline-none'
+                        className='w-full  px-3 py-1 sm:py-2 border-2 border-gray-300 rounded outline-none'
                         value={level}
                         onChange={e => setLevel(e.target.value)}>
 
@@ -115,7 +115,7 @@ const AddJob = () => {
                 <p className='mb-2 text-gray-600'>حقوق کار</p>
                 <input
                     value={salary}
-                    className='w-full px-3 py-2 border-2 border-gray-300 rounded sm:w-[120px]'
+                    className='w-full px-3 py-1 sm:py-2 border-2 border-gray-300 rounded sm:w-[120px]'
                     onChange={e => setSalary(e.target.value)}
                     type="Number"
                     min={0} />

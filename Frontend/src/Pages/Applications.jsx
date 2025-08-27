@@ -29,13 +29,13 @@ const Applications = () => {
             })
 
             if (data.succuss) {
-                toast.success(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+                toast.success(data.message)
                 await fetchUsersData()
             } else {
-                toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+                toast.error(data.message)
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+            toast.error(error.message)
         }
         setResume(null)
         setIsEdit(false)

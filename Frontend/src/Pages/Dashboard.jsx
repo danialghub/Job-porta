@@ -18,6 +18,7 @@ const Dashboard = () => {
         }
     }, [companyData])
     return (
+
         <div className='min-h-screen '>
             {/* navbar for recruiter Login */}
             <div className='shadow py-4'>
@@ -53,9 +54,9 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className='flex items-start'>
+            <div className='flex items-start '>
                 {/* left Sidebar  */}
-                <div className='inline-block min-h-screen border-r-2 '>
+                <div className='inline-block min-h-screen border-l-2 '>
                     <ul className='flex flex-col items-start pt-5 text-gray-800'>
                         {navMenu.map((menu, idx) => (
                             <NavLink
@@ -72,10 +73,10 @@ const Dashboard = () => {
                     {/* main content mounts from other pages */}
                 </div>
 
-                <div className='flex-1 '>
+              
 
                     <Outlet />
-                </div>
+               
 
             </div>
         </div>

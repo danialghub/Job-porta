@@ -29,10 +29,10 @@ const AppContextProvider = ({ children }) => {
             if (data.success) {
                 setJobs(data.jobs)
             } else {
-                toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+                toast.error(data.message)
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+            toast.error(error.message)
 
         }
     }
@@ -43,11 +43,11 @@ const AppContextProvider = ({ children }) => {
                 setCompanyData(data.company)
 
             } else {
-                toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+                toast.error(data.message)
             }
 
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+            toast.error(error.message)
         }
     }
     const fetchUsersData = async () => {
@@ -62,10 +62,10 @@ const AppContextProvider = ({ children }) => {
                 setUserData(data.user)
 
             } else {
-                toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+                toast.error(data.message)
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+            toast.error(error.message)
 
         }
     }
@@ -85,7 +85,7 @@ const AppContextProvider = ({ children }) => {
                 setUserApplications([])
             }
         } catch (error) {
-            toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+            toast.error(error.message, {  })
 
         }
     }
@@ -95,7 +95,7 @@ const AppContextProvider = ({ children }) => {
         setCompanyToken(null)
         localStorage.removeItem('companyToken')
         navigate('/')
-        toast.success("با موفقیت خارج شدید", { className: "max-sm:w-[70vw] max-sm:mt-3 max-sm:mx-auto" })
+        toast.success("با موفقیت خارج شدید")
     }
 
     useEffect(() => {
@@ -104,6 +104,7 @@ const AppContextProvider = ({ children }) => {
         if (storedCompanyToken) {
             setCompanyToken(storedCompanyToken)
         }
+        
     }, [])
     useEffect(() => {
         if (companyToken) {

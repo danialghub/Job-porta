@@ -4,7 +4,7 @@ import { AppContext } from './context/AppContext'
 import RecruiterLogin from './Components/RecruiterLogin'
 import AppRoutes from './routes'
 import 'quill/dist/quill.snow.css'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer, Slide } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
@@ -14,9 +14,12 @@ function App() {
   return (
     <>
       {showRecruiterLogin && <RecruiterLogin />}
-      <div className='max-sm:w-[80vw] max-sm:mx-auto' >
-      <ToastContainer />
-    </div >
+      <div className='max-sm:w-[80vw] max-sm:mx-auto ' >
+        <ToastContainer
+          rtl={true}
+          draggable
+        />
+      </div >
       <AppRoutes />
     </>
 

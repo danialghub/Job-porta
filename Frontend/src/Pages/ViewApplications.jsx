@@ -21,10 +21,10 @@ const ViewApplications = () => {
         setApplicants(data.applications.reverse())
 
       } else {
-        toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+        toast.error(data.message, {  })
       }
     } catch (error) {
-      toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+      toast.error(error.message, {  })
 
     }
   }
@@ -38,12 +38,12 @@ const ViewApplications = () => {
       )
       if (data.success) {
         fetchCompanyJobApplications()
-        toast.success(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+        toast.success(data.message)
       } else {
-        toast.error(data.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+        toast.error(data.message)
       }
     } catch (error) {
-      toast.error(error.message, { className: "max-sm:w-[70vw] max-sm:mr-12 max-sm:mt-4 max-sm:mx-auto" })
+      toast.error(error.message)
 
     }
   }
@@ -57,21 +57,21 @@ const ViewApplications = () => {
 
   return applicants ? applicants.length === 0 ?
     (
-      (<div className='flex items-center justify-center h-[90vh]'>
+      (<div className='flex items-center justify-center h-[90vh] flex-1'>
         <p className='text-xl sm:text-2xl '>هیچ درخواستی وجود ندارد</p>
       </div>)
     )
     : (
 
-      <div className='container max-w-5xl p-4 '>
-        <div className=''>
-          <table className='min-w-full max-w-4xl bg-white border border-gray-200 max-sm:text-sm'>
+      <div className='container sm:max-w-4xl   p-4 flex-1 overflow-hidden '>
+        <div className='overflow-auto '>
+          <table className='max-sm:min-w-max min-w-full bg-white border border-gray-200 max-sm:text-sm'>
             <thead>
               <tr className='border-b'>
                 <th className='px-4 py-2 text-right'>#</th>
                 <th className='px-4 py-2 text-right'>نام کاربری</th>
-                <th className='px-4 py-2 text-right max-sm:hidden'>عنوان شغل</th>
-                <th className='px-4 py-2 text-right max-sm:hidden'>مکان</th>
+                <th className='px-4 py-2 text-right '>عنوان شغل</th>
+                <th className='px-4 py-2 text-right '>مکان</th>
                 <th className='px-4 py-2 text-right'>رزومه</th>
                 <th className='px-4 py-2 text-center'>وضعیت</th>
               </tr>
@@ -82,12 +82,12 @@ const ViewApplications = () => {
                   <td className='px-4 py-2 text-right border-b'>{idx + 1}</td>
                   <td className='px-4 py-2 text-right border-b flex items-center'>
                     <img
-                      className='w-10 h-10 rounded-full max-sm:hidden ml-3'
+                      className='w-10 h-10 rounded-full ml-3'
                       src={data.userId.image} alt="" />
                     <span>{data.userId.name}</span>
                   </td>
-                  <td className='px-4 py-2 text-right border-b max-sm:hidden'>{data.jobId.title}</td>
-                  <td className='px-4 py-2 text-right border-b max-sm:hidden'>{data.jobId.location}</td>
+                  <td className='px-4 py-2 text-right border-b '>{data.jobId.title}</td>
+                  <td className='px-4 py-2 text-right border-b '>{data.jobId.location}</td>
                   <td className='px-4 py-2 text-right border-b'>
                     <a
                       className='bg-blue-50 text-blue-400 px-3 py-1 rounded inline-flex gap-2  items-center'
