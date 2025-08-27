@@ -65,7 +65,7 @@ const ViewApplications = () => {
     )
     : (
 
-      <div className='container relative sm:max-w-4xl min-h-[50vh] sm:min-h-[70vh]  p-4 flex-1 overflow-hidden '>
+      <div className='container relative sm:max-w-4xl min-h-[55vh] sm:min-h-[70vh]  p-4 flex-1 overflow-hidden '>
         <div className='overflow-auto '>
           <table className='max-sm:min-w-max sm:min-w-full bg-white border border-gray-200 max-sm:text-sm'>
             <thead>
