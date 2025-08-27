@@ -5,7 +5,7 @@ import { AppContext } from '../context/AppContext'
 import Navbar from '../Components/Navbar'
 const Dashboard = () => {
     const navigate = useNavigate()
-    const { companyData, logoutHandler } = useContext(AppContext)
+    const { companyData } = useContext(AppContext)
     const navMenu = [
         { title: 'ایجاد کار', route: '/dashboard/add-job', icon: assets.add_icon },
         { title: 'مدیریت کارها', route: '/dashboard/manage-jobs', icon: assets.home_icon },
@@ -21,7 +21,11 @@ const Dashboard = () => {
 
         <div className='min-h-screen '>
             {/* navbar for recruiter Login */}
-           <Navbar />
+            <Navbar >
+                <li className='py-2 px-4 cursor-pointer pr-10'>
+                    <NavLink to="/">خانه</NavLink>
+                </li>
+            </Navbar>
 
             <div className='flex items-start '>
                 {/* left Sidebar  */}
@@ -41,12 +45,7 @@ const Dashboard = () => {
                     </ul>
                     {/* main content mounts from other pages */}
                 </div>
-
-              
-
-                    <Outlet />
-               
-
+                <Outlet />
             </div>
         </div>
     )

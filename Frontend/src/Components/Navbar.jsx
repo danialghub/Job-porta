@@ -3,7 +3,7 @@ import { assets } from '../assets/assets'
 import { useUser, useClerk, UserButton } from '@clerk/clerk-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
-const Navbar = () => {
+const Navbar = ({ children }) => {
     const { openSignIn } = useClerk()
     const { user } = useUser()
     const navigate = useNavigate()
@@ -37,9 +37,10 @@ const Navbar = () => {
 
                                     <div className='hidden absolute group-hover:block top-0 left-5 sm:left-0 z-10 text-black rounded pt-12 '>
                                         <ul className='list-none m-0 p-2 bg-white rounded-md border text-sm shadow '>
-                                            <li className='py-2 px-4 cursor-pointer pr-10'>
+                                            {children || <li className='py-2 px-4 cursor-pointer pr-10'>
                                                 <Link to="/dashboard">داشبورد</Link>
-                                            </li>
+                                            </li>}
+
                                             <li onClick={logoutHandler} className='py-2 px-4 cursor-pointer pr-10'>خروج</li>
                                         </ul>
                                     </div>

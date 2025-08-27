@@ -133,7 +133,7 @@ const JobListing = () => {
 
             </div>
             {/* Job List */}
-            {jobs ? !filteredJobs || filteredJobs.length == 0 ?
+            {jobs ? !filteredJobs || filteredJobs.length === 0 ?
                 (<div className='flex-1 flex items-center justify-center h-[90vh]'>
                     <p className='text-xl sm:text-3xl text-gray-700 text-bold'>No Job Available or posted</p>
                 </div>)

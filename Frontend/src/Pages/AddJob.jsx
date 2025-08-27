@@ -5,11 +5,12 @@ import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 const AddJob = () => {
+    console.log(JobCategories, JobLocations);
 
     const [title, setTitle] = useState('')
-    const [location, setLocation] = useState('Bangalore')
-    const [category, setCategory] = useState('Programming')
-    const [level, setLevel] = useState('Beginner level')
+    const [location, setLocation] = useState('تهران')
+    const [category, setCategory] = useState('برنامه نویسی')
+    const [level, setLevel] = useState('سطح مبتدی')
     const [salary, setSalary] = useState(0)
 
     const editorRef = useRef(null)
@@ -37,7 +38,7 @@ const AddJob = () => {
                 location,
             }, { headers: { token: companyToken } })
             if (data.success) {
-                toast.success("a new Job Successufully Added")
+                toast.success("کار جدید با موفقیت ایجاد شد")
                 setTitle("")
                 setSalary(0)
                 quillRef.current.root.innerHTML = ""
