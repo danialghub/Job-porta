@@ -65,8 +65,8 @@ const ViewApplications = () => {
     )
     : (
 
-      <div className='container relative sm:max-w-4xl min-h-[60vh] sm:min-h-[70vh]  p-4 flex-1 overflow-hidden '>
-        <div className='overflow-auto '>
+      <div className='container flex flex-col min-h-[60vh] md:min-h-[45vh] xl:min-h-[55vh] 2xl:min-h-[60vh] justify-between sm:max-w-4xl  p-4 flex-1 overflow-hidden '>
+        <div className='overflow-auto flex-1'>
           <table className='max-sm:min-w-max sm:min-w-full bg-white border border-gray-200 max-sm:text-sm'>
             <thead>
               <tr className='border-b'>
@@ -123,9 +123,9 @@ const ViewApplications = () => {
             </tbody>
           </table>
         </div>
-        <div className='absolute bottom-0 right-1/2 translate-x-1/2'>
+       
           <Pagination list={applicants} page={currentPage} setPage={setCurrentPage} perPage={7} />
-        </div>
+        
 
       </div>
     ) : <Loader />

@@ -54,7 +54,7 @@ const AddJob = () => {
 
 
     return (
-        <form className='container max-w-5xl p-4 flex flex-col w-full items-start gap-5'>
+        <form className='flex-1 container max-w-5xl p-4 flex flex-col w-full items-start gap-5'>
             <div className='w-full'>
                 <p className='mb-2 text-gray-600'>عنوان کار</p>
                 <input

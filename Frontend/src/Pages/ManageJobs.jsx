@@ -48,50 +48,50 @@ const ManageJobs = () => {
     }
   }, [companyToken])
   return jobs ? jobs.length === 0 ?
-    (<div className='flex items-center justify-center h-[90vh] flex-1'>
+    (<div className='flex items-center justify-center h-[90vh] flex-1 '>
       <p className='text-xl sm:text-2xl '>هیچ کاری در دسترس نیست یا پست نشده</p>
     </div>) : (
       <>
 
-        <div className='container p-4 mt-2 sm:max-w-4xl overflow-hidden min-h-[65vh] relative  flex-1'>
-          <div className='overflow-x-auto'>
-            <table className='min-w-max sm:min-w-full bg-white border border-gray-200 '>
-              <thead>
-                <tr className='border-b'>
-                  <th className='px-4 py-3 border-b text-right'>#</th>
-                  <th className='px-4 py-3 border-b text-right'>عنوان کار</th>
-                  <th className='px-4 py-3 border-b text-right '>تاریخ</th>
-                  <th className='px-4 py-3 border-b text-right '>مکان</th>
-                  <th className='px-4 py-3 border-b text-center '>درخواستی ها</th>
-                  <th className='px-4 py-3 border-b text-right '>وضعیت نمایش</th>
-                </tr>
-              </thead>
-              <tbody>
-                {jobs.slice((currentPage - 1) * 7, (currentPage) * 7).map((item, idx) => (
-                  <tr key={idx} className='text-gray-700'>
-                    <td className='px-4 py-3 border-b '>{idx + 1}</td>
-                    <td className='px-4 py-3 border-b  '>{item.title}</td>
-                    <td className='px-4 py-3 border-b  '>{moment(item.date).format('ll')}</td>
-                    <td className='px-4 py-3 border-b  '>{item.location}</td>
-                    <td className='px-4 py-3 border-b text-center '>{item.applicants}</td>
-                    <td className='px-4 py-3 border-b  text-center'>
-                      <input
-                        onChange={() => changeJobVisibility(item._id)}
-                        checked={item.visible} className='scale-125 ml-4' type="checkbox" />
-                    </td>
+        <div className='container p-4 mt-2 sm:max-w-4xl overflow-hidden flex flex-col min-h-[62vh] md:min-h-[42vh] xl:min-h-[55vh] 2xl:min-h-[78vh] justify-between flex-1'>
+      
+            <div className='overflow-x-auto flex-1'>
+              <table className='min-w-max sm:min-w-full bg-white border border-gray-200 '>
+                <thead>
+                  <tr className='border-b'>
+                    <th className='px-4 py-3 border-b text-right'>#</th>
+                    <th className='px-4 py-3 border-b text-right'>عنوان کار</th>
+                    <th className='px-4 py-3 border-b text-right '>تاریخ</th>
+                    <th className='px-4 py-3 border-b text-right '>مکان</th>
+                    <th className='px-4 py-3 border-b text-center '>درخواستی ها</th>
+                    <th className='px-4 py-3 border-b text-right '>وضعیت نمایش</th>
                   </tr>
-                ))
-                }
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {jobs.slice((currentPage - 1) * 7, (currentPage) * 7).map((item, idx) => (
+                    <tr key={idx} className='text-gray-700'>
+                      <td className='px-4 py-3 border-b '>{idx + 1}</td>
+                      <td className='px-4 py-3 border-b  '>{item.title}</td>
+                      <td className='px-4 py-3 border-b  '>{moment(item.date).format('ll')}</td>
+                      <td className='px-4 py-3 border-b  '>{item.location}</td>
+                      <td className='px-4 py-3 border-b text-center '>{item.applicants}</td>
+                      <td className='px-4 py-3 border-b  text-center'>
+                        <input
+                          onChange={() => changeJobVisibility(item._id)}
+                          checked={item.visible} className='scale-125 ml-4' type="checkbox" />
+                      </td>
+                    </tr>
+                  ))
+                  }
+                </tbody>
+              </table>
+            </div>
+            <button
+              onClick={() => navigate('/dashboard/add-job')}
+              className='bg-black/70 text-white w-[150px] py-2 px-8 rounded mt-6'>ایجاد کار</button>
+     
 
-          <button
-            onClick={() => navigate('/dashboard/add-job')}
-            className='bg-black/70 text-white py-2 px-8 rounded mt-6'>ایجاد کار</button>
-          <div className='absolute bottom-0 right-1/2 translate-x-1/2'>
-            <Pagination list={jobs} page={currentPage} setPage={setCurrentPage} perPage={7} />
-          </div>
+          <Pagination list={jobs} page={currentPage} setPage={setCurrentPage} perPage={7} />
         </div>
 
 
