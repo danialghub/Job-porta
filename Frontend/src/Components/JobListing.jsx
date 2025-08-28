@@ -139,21 +139,21 @@ const JobListing = () => {
                 </div>)
                 :
 
-                <section className=' w-full lg-w-3/4 text-gray-800 max-lg:px-4  relative' id='job_list'>
+                <section className=' w-full lg-w-3/4 text-gray-800 max-lg:px-4 flex flex-col justify-between min-h-[90vh] lg:min-h-[75vh] 2xl:min-h-[100vh] ' id='job_list'>
                     <h3 className='font-medium text-3xl py-2'>موقعیت  شغلی های اخیر</h3>
                     <p className='mb-8'>کاری که مورد علاقه ات است را به بهترین شرکت درخواست بده</p>
 
 
-                    <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
+                    <div className='grid grid-cols-1 grid-rows-2 sm:grid-cols-2 xl:grid-cols-3 gap-4 flex-1'>
                         {filteredJobs.slice((currentPage - 1) * 6, (currentPage) * 6).map(data => (
                             <JobCard key={data._id} {...data} />
                         ))}
                     </div>
                     {/* Pagination */}
                     {filteredJobs.length > 0 && (
-                        <div className='absolute -bottom-14 sm:-bottom-10 right-1/2 translate-x-1/2'>
+                       
                             <Pagination list={filteredJobs} page={currentPage} setPage={setCurrentPage} perPage={6} />
-                        </div>
+                        
                     )
                     }
                 </section>

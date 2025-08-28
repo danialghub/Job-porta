@@ -65,7 +65,7 @@ const ViewApplications = () => {
     )
     : (
 
-      <div className='container flex flex-col min-h-[60vh] md:min-h-[45vh] xl:min-h-[55vh] 2xl:min-h-[60vh] justify-between sm:max-w-4xl  p-4 flex-1 overflow-hidden '>
+      <div className='container flex flex-col min-h-[65vh] md:min-h-[135vh] lg:min-h-[45vh] xl:min-h-[55vh] 2xl:min-h-[60vh] justify-between sm:max-w-4xl  p-4 flex-1 overflow-hidden '>
         <div className='overflow-auto flex-1'>
           <table className='max-sm:min-w-max sm:min-w-full bg-white border border-gray-200 max-sm:text-sm'>
             <thead>

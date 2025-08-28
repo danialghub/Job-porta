@@ -53,7 +53,7 @@ const ManageJobs = () => {
     </div>) : (
       <>
 
-        <div className='container p-4 mt-2 sm:max-w-4xl overflow-hidden flex flex-col min-h-[62vh] md:min-h-[42vh] xl:min-h-[55vh] 2xl:min-h-[78vh] justify-between flex-1'>
+        <div className='container p-4 mt-2 sm:max-w-4xl overflow-hidden flex flex-col min-h-[65vh] md:min-h-[140vh] lg:min-h-[45vh] xl:min-h-[55vh] 2xl:min-h-[78vh] justify-between flex-1'>
       
             <div className='overflow-x-auto flex-1'>
               <table className='min-w-max sm:min-w-full bg-white border border-gray-200 '>
